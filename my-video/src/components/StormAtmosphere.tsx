@@ -72,34 +72,14 @@ export const StormAtmosphere: React.FC<StormAtmosphereProps> = ({
     }
   }, [section]);
 
-  // Rain particles generated deterministically
-  const rainDrops = useMemo(() => {
-    return Array.from({ length: 70 }).map((_, i) => ({
-      x: ((i * 137.5) % 100),
-      speed: 20 + ((i * 7) % 25),
-      length: 80 + ((i * 13) % 100),
-      opacity: 0.15 + ((i * 9) % 35) / 100,
-    }));
-  }, []);
+  // Dynamic 3D Parallax offsets matching true camera movement
+  const bgShiftX = -camera.x * 0.16;
+  const bgShiftY = -camera.y * 0.16;
+  const bgRoll = -camera.rz * 0.75;
+  const bgTiltX = -camera.rx * 0.75;
+  const bgPanY = -camera.ry * 0.75;
 
-  // Wind speed streaks for Chorus / Tempest scenes
-  const windStreaks = useMemo(() => {
-    return Array.from({ length: 24 }).map((_, i) => ({
-      y: ((i * 93) % 100),
-      speed: 35 + ((i * 11) % 40),
-      length: 300 + ((i * 29) % 400),
-      opacity: 0.1 + ((i * 7) % 25) / 100,
-    }));
-  }, []);
-
-  // 3D Parallax offsets calculated from camera orientation & translation
-  const bgShiftX = -camera.x * 0.04;
-  const bgShiftY = -camera.y * 0.04;
-  const bgRoll = -camera.rz * 0.35;
-  const bgTiltX = -camera.rx * 0.4;
-  const bgPanY = -camera.ry * 0.4;
-
-  const stormVortexRotation = frame * 0.25;
+  const stormVortexRotation = frame * 0.35;
 
   return (
     <div
@@ -116,14 +96,14 @@ export const StormAtmosphere: React.FC<StormAtmosphereProps> = ({
           position: "absolute",
           top: "50%",
           left: "50%",
-          width: width * 1.8,
-          height: height * 1.8,
+          width: width * 2.2,
+          height: height * 2.2,
           transform: `
             translate(-50%, -50%)
             translate(${bgShiftX + bgPanY}px, ${bgShiftY + bgTiltX}px)
             rotate(${bgRoll + stormVortexRotation}deg)
           `,
-          backgroundImage: `radial-gradient(ellipse at 50% 50%, ${sectionColors.bg1} 0%, ${sectionColors.bg2} 70%)`,
+          backgroundImage: `radial-gradient(ellipse at 50% 50%, ${sectionColors.bg1} 0%, ${sectionColors.bg2} 65%)`,
           opacity: 0.95,
           pointerEvents: "none",
         }}
@@ -132,27 +112,27 @@ export const StormAtmosphere: React.FC<StormAtmosphereProps> = ({
         <div
           style={{
             position: "absolute",
-            top: "20%",
-            left: "25%",
-            width: "50%",
-            height: "50%",
+            top: "18%",
+            left: "22%",
+            width: "55%",
+            height: "55%",
             borderRadius: "50%",
             background: `radial-gradient(ellipse at 40% 40%, ${sectionColors.cloudTone} 0%, transparent 65%)`,
-            filter: "blur(50px)",
-            transform: `rotate(${frame * 0.1}deg) scale(1.3)`,
+            filter: "blur(60px)",
+            transform: `rotate(${frame * 0.12}deg) scale(1.3)`,
           }}
         />
         <div
           style={{
             position: "absolute",
-            top: "35%",
-            left: "40%",
-            width: "45%",
-            height: "45%",
+            top: "32%",
+            left: "38%",
+            width: "48%",
+            height: "48%",
             borderRadius: "50%",
             background: `radial-gradient(ellipse at 60% 60%, ${sectionColors.glow} 0%, transparent 70%)`,
-            filter: "blur(70px)",
-            transform: `rotate(${-frame * 0.15}deg)`,
+            filter: "blur(80px)",
+            transform: `rotate(${-frame * 0.18}deg)`,
           }}
         />
       </div>
@@ -164,82 +144,12 @@ export const StormAtmosphere: React.FC<StormAtmosphereProps> = ({
             position: "absolute",
             inset: 0,
             backgroundColor: accentColor,
-            opacity: 0.22,
+            opacity: 0.28,
             mixBlendMode: "screen",
             pointerEvents: "none",
           }}
         />
       )}
-
-      {/* Horizontal Hurricane Wind Streaks (Active during Chorus & Outro) */}
-      {(section === "chorus" || section === "chorus2" || section === "outro") && (
-        <svg
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            pointerEvents: "none",
-            transform: `translate(${bgShiftX * 0.5}px, ${bgShiftY * 0.5}px) rotate(${bgRoll * 0.5}deg)`,
-          }}
-        >
-          {windStreaks.map((w, idx) => {
-            const xPos =
-              ((frame * w.speed * sectionColors.windSpeedMultiplier + idx * 250) %
-                (width + w.length * 2)) -
-              w.length;
-            const yPos = (w.y / 100) * height;
-            return (
-              <line
-                key={`wind-${idx}`}
-                x1={xPos}
-                y1={yPos}
-                x2={xPos + w.length}
-                y2={yPos - 15}
-                stroke={accentColor}
-                strokeWidth={1.5}
-                strokeOpacity={w.opacity}
-                strokeLinecap="round"
-              />
-            );
-          })}
-        </svg>
-      )}
-
-      {/* 3D Diagonal Rain Streaks (React to camera roll & velocity) */}
-      <svg
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          pointerEvents: "none",
-          transform: `translate(${bgShiftX}px, ${bgShiftY}px) rotate(${bgRoll * 0.4}deg)`,
-        }}
-      >
-        {rainDrops.map((drop, idx) => {
-          const yPos =
-            ((frame * drop.speed * sectionColors.windSpeedMultiplier + idx * 80) %
-              (height + 250)) -
-            100;
-          const xPos =
-            ((drop.x / 100) * width + (frame * 5 * sectionColors.windSpeedMultiplier)) %
-            width;
-          return (
-            <line
-              key={`rain-${idx}`}
-              x1={xPos}
-              y1={yPos}
-              x2={xPos - drop.length * 0.4}
-              y2={yPos + drop.length}
-              stroke={sectionColors.accent}
-              strokeWidth={1.5}
-              strokeOpacity={drop.opacity}
-              strokeLinecap="round"
-            />
-          );
-        })}
-      </svg>
 
       {/* Atmospheric Fog & Dark Vignette */}
       <div
@@ -247,7 +157,7 @@ export const StormAtmosphere: React.FC<StormAtmosphereProps> = ({
           position: "absolute",
           inset: 0,
           background:
-            "radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(2, 4, 8, 0.90) 100%)",
+            "radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(2, 4, 8, 0.92) 100%)",
           pointerEvents: "none",
         }}
       />

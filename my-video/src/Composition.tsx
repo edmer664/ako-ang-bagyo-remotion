@@ -11,6 +11,7 @@ import {
 import { Lightning } from "./components/Lightning";
 import { SpatialWorld } from "./components/SpatialWorld";
 import { StormAtmosphere } from "./components/StormAtmosphere";
+import { ThreeStormAtmosphere } from "./components/ThreeStormAtmosphere";
 import {
   FPS,
   getActiveLineIndex,
@@ -112,6 +113,14 @@ export const AkoAngBagyoComposition: React.FC = () => {
         activeSection={activeLine?.section || "intro"}
         activeIndex={activeIndex}
         accentColor={accentColor}
+      />
+
+      {/* Realistic 3D Volumetric Rain & Atmosphere (Three.js WebGL) */}
+      <ThreeStormAtmosphere
+        section={activeLine?.section || "intro"}
+        camera={camera}
+        accentColor={accentColor}
+        isLightningActive={isLightningActive}
       />
 
       {/* Lightning Strike Sequences */}

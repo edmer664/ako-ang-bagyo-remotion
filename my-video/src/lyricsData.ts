@@ -690,58 +690,125 @@ export const getCameraForFrame = (frame: number, fps: number): SpatialCoord => {
   const activeIndex = getActiveLineIndex(currentTimeSec);
   const currentLine = LYRICS[activeIndex];
   const prevLine = activeIndex > 0 ? LYRICS[activeIndex - 1] : currentLine;
+  const nextLine =
+    activeIndex < LYRICS.length - 1 ? LYRICS[activeIndex + 1] : currentLine;
 
   const startF = Math.round(currentLine.startSec * fps);
-  const localF = frame - startF;
+  const endF = Math.round(currentLine.endSec * fps);
+  const localF = Math.max(0, frame - startF);
+  const lineDuration = Math.max(1, endF - startF);
 
-  const lineDurationFrames = Math.round(
-    (currentLine.endSec - currentLine.startSec) * fps
-  );
-  const transDuration = Math.min(
-    16,
-    Math.max(8, Math.floor(lineDurationFrames * 0.35))
-  );
+  // Normalized time across the line: 0.0 to 1.0
+  const u = Math.min(1, localF / lineDuration);
 
-  const transProgress = interpolate(localF, [0, transDuration], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.bezier(0.16, 1, 0.3, 1),
-  });
+  // Dynamic arrival and departure windows
+  const arrivalRatio = Math.min(0.28, 20 / lineDuration);
+  const departRatio = Math.max(0.72, 1 - 20 / lineDuration);
 
-  const drift = Math.sin((localF / fps) * 0.8) * 12;
+  let baseX: number;
+  let baseY: number;
+  let baseZ: number;
+  let baseRx: number;
+  let baseRy: number;
+  let baseRz: number;
 
-  return {
-    x: interpolate(
-      transProgress,
-      [0, 1],
-      [prevLine.camera.x, currentLine.camera.x]
-    ),
-    y: interpolate(
-      transProgress,
-      [0, 1],
-      [prevLine.camera.y, currentLine.camera.y]
-    ),
-    z:
-      interpolate(
-        transProgress,
-        [0, 1],
-        [prevLine.camera.z, currentLine.camera.z]
-      ) - drift,
-    rx: interpolate(
-      transProgress,
+  if (u < arrivalRatio) {
+    // Phase 1: Arrive from previous waypoint into current waypoint
+    const pIn = interpolate(u, [0, arrivalRatio], [0, 1], {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+      easing: Easing.bezier(0.16, 1, 0.3, 1),
+    });
+    baseX = interpolate(pIn, [0, 1], [prevLine.camera.x, currentLine.camera.x]);
+    baseY = interpolate(pIn, [0, 1], [prevLine.camera.y, currentLine.camera.y]);
+    baseZ = interpolate(pIn, [0, 1], [prevLine.camera.z, currentLine.camera.z]);
+    baseRx = interpolate(
+      pIn,
       [0, 1],
       [prevLine.camera.rx, currentLine.camera.rx]
-    ),
-    ry: interpolate(
-      transProgress,
+    );
+    baseRy = interpolate(
+      pIn,
       [0, 1],
       [prevLine.camera.ry, currentLine.camera.ry]
-    ),
-    rz: interpolate(
-      transProgress,
+    );
+    baseRz = interpolate(
+      pIn,
       [0, 1],
       [prevLine.camera.rz, currentLine.camera.rz]
-    ),
+    );
+  } else if (u > departRatio) {
+    // Phase 3: Accelerate and whip into next waypoint
+    const pOut = interpolate(u, [departRatio, 1], [0, 1], {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+      easing: Easing.bezier(0.5, 0, 0.8, 0.2),
+    });
+    baseX = interpolate(pOut, [0, 1], [currentLine.camera.x, nextLine.camera.x]);
+    baseY = interpolate(pOut, [0, 1], [currentLine.camera.y, nextLine.camera.y]);
+    baseZ = interpolate(pOut, [0, 1], [currentLine.camera.z, nextLine.camera.z]);
+    baseRx = interpolate(
+      pOut,
+      [0, 1],
+      [currentLine.camera.rx, nextLine.camera.rx]
+    );
+    baseRy = interpolate(
+      pOut,
+      [0, 1],
+      [currentLine.camera.ry, nextLine.camera.ry]
+    );
+    baseRz = interpolate(
+      pOut,
+      [0, 1],
+      [currentLine.camera.rz, nextLine.camera.rz]
+    );
+  } else {
+    // Phase 2: Steady reading phase
+    baseX = currentLine.camera.x;
+    baseY = currentLine.camera.y;
+    baseZ = currentLine.camera.z;
+    baseRx = currentLine.camera.rx;
+    baseRy = currentLine.camera.ry;
+    baseRz = currentLine.camera.rz;
+  }
+
+  // Continuous cinematic forward dolly through space (150px forward travel)
+  const forwardDolly = (u - 0.5) * 150;
+
+  // Gentle organic orbital tracking sway
+  const orbitalSwayX = Math.sin((localF / fps) * 1.6) * 35;
+  const orbitalSwayY = Math.cos((localF / fps) * 1.4) * 22;
+  const angularDriftY = Math.sin((localF / fps) * 1.2) * 2.5;
+  const angularDriftZ = Math.cos((localF / fps) * 1.5) * 1.8;
+
+  // Section-specific transition impulses
+  let transitionImpulseRy = 0;
+  let transitionImpulseRz = 0;
+  let transitionImpulseRx = 0;
+
+  if (u > departRatio && currentLine.section !== nextLine.section) {
+    const pTrans = interpolate(u, [departRatio, 1], [0, 1]);
+    const peak = Math.sin(pTrans * Math.PI);
+
+    if (nextLine.section === "chorus" || nextLine.section === "chorus2") {
+      transitionImpulseRy = peak * (activeIndex % 2 === 0 ? 30 : -30);
+      transitionImpulseRz = peak * 14;
+    } else if (nextLine.section === "outro") {
+      transitionImpulseRx = -peak * 35;
+    } else if (nextLine.section === "prechorus") {
+      transitionImpulseRz = peak * 12;
+    } else if (nextLine.section === "bridge") {
+      transitionImpulseRx = peak * 18;
+    }
+  }
+
+  return {
+    x: baseX + orbitalSwayX,
+    y: baseY + orbitalSwayY,
+    z: baseZ + forwardDolly,
+    rx: baseRx + transitionImpulseRx,
+    ry: baseRy + angularDriftY + transitionImpulseRy,
+    rz: baseRz + angularDriftZ + transitionImpulseRz,
   };
 };
 
