@@ -1,0 +1,9 @@
+node_modules
+dist
+.DS_Store
+.env
+my-video-colab.zip
+out
+*.log
+.agents
+

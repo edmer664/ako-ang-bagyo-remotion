@@ -1,0 +1,61 @@
+name: Render Video
+
+on:
+  workflow_dispatch:
+    inputs:
+      composition:
+        description: 'Composition ID to render'
+        required: true
+        default: 'AkoAngBagyo'
+      frames:
+        description: 'Frame range (leave empty for full video, or e.g. 0-300 for quick test)'
+        required: false
+        default: ''
+
+jobs:
+  render:
+    name: Render MP4 Video
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    defaults:
+      run:
+        working-directory: ./my-video
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+          cache-dependency-path: my-video/package-lock.json
+
+      - name: Install system media and graphics libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg libnss3 libatk1.0-0 libatk-bridge2.0-0 \
+            libcups2 libgbm1 libasound2 libpangocairo-1.0-0 libxss1 libxcomposite1 \
+            libxcursor1 libxdamage1 libxrandr2
+
+      - name: Install NPM dependencies
+        run: npm ci
+
+      - name: Render Remotion Video
+        run: |
+          mkdir -p out
+          FRAME_FLAG=""
+          if [ -n "${{ github.event.inputs.frames }}" ]; then
+            FRAME_FLAG="--frames=${{ github.event.inputs.frames }}"
+          fi
+          npx remotion render src/index.ts "${{ github.event.inputs.composition }}" out/ako-ang-bagyo.mp4 --concurrency=100% --gl=angle $FRAME_FLAG
+
+      - name: Upload Video Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ako-ang-bagyo-video
+          path: my-video/out/ako-ang-bagyo.mp4
+          if-no-files-found: error
+          retention-days: 14
