@@ -21,12 +21,12 @@ export const AkoAngBagyoComposition: React.FC = () => {
 
   // Active line for atmosphere & lighting
   const activeLine = useMemo(() => {
-    return (
-      LYRICS.find(
-        (line) =>
-          currentTimeSec >= line.startSec && currentTimeSec < line.endSec
-      ) || LYRICS[0]
-    );
+    for (let i = 0; i < LYRICS.length; i++) {
+      if (currentTimeSec < LYRICS[i].endSec) {
+        return LYRICS[i];
+      }
+    }
+    return LYRICS[LYRICS.length - 1];
   }, [currentTimeSec]);
 
   // Section accent color
@@ -80,7 +80,7 @@ export const AkoAngBagyoComposition: React.FC = () => {
       {/* Background Audio */}
       <Audio src={staticFile("audio.mp3")} />
 
-      {/* Atmospheric Background & HUD */}
+      {/* Atmospheric Background */}
       <StormAtmosphere
         section={activeLine?.section || "intro"}
         globalTimeSec={currentTimeSec}

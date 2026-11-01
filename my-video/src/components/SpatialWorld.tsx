@@ -19,13 +19,14 @@ export const SpatialWorld: React.FC<SpatialWorldProps> = ({ accentColor }) => {
 
   const currentTimeSec = frame / fps;
 
-  // Find active line index
+  // Find active line index (monotonic search so it never resets to 0 during gaps)
   const activeIndex = useMemo(() => {
-    const idx = LYRICS.findIndex(
-      (line) =>
-        currentTimeSec >= line.startSec && currentTimeSec < line.endSec
-    );
-    return idx === -1 ? 0 : idx;
+    for (let i = 0; i < LYRICS.length; i++) {
+      if (currentTimeSec < LYRICS[i].endSec) {
+        return i;
+      }
+    }
+    return LYRICS.length - 1;
   }, [currentTimeSec]);
 
   // Compute smooth camera position in 3D world
@@ -37,8 +38,11 @@ export const SpatialWorld: React.FC<SpatialWorldProps> = ({ accentColor }) => {
     const startF = Math.round(currentLine.startSec * fps);
     const localF = frame - startF;
 
-    // Transition duration from prev waypoint to current
-    const transDuration = Math.min(14, Math.floor((currentLine.endSec - currentLine.startSec) * fps * 0.4));
+    // Transition duration from prev waypoint to current (12-16 frames)
+    const lineDurationFrames = Math.round(
+      (currentLine.endSec - currentLine.startSec) * fps
+    );
+    const transDuration = Math.min(16, Math.max(8, Math.floor(lineDurationFrames * 0.35)));
 
     const transProgress = interpolate(localF, [0, transDuration], [0, 1], {
       extrapolateLeft: "clamp",
@@ -46,8 +50,8 @@ export const SpatialWorld: React.FC<SpatialWorldProps> = ({ accentColor }) => {
       easing: Easing.bezier(0.16, 1, 0.3, 1),
     });
 
-    // Subtle drift during hold
-    const drift = (localF / fps) * 15;
+    // Subtle drift during hold for organic motion
+    const drift = Math.sin((localF / fps) * 0.8) * 12;
 
     return {
       x: interpolate(
@@ -60,11 +64,12 @@ export const SpatialWorld: React.FC<SpatialWorldProps> = ({ accentColor }) => {
         [0, 1],
         [prevLine.camera.y, currentLine.camera.y]
       ),
-      z: interpolate(
-        transProgress,
-        [0, 1],
-        [prevLine.camera.z, currentLine.camera.z]
-      ) - drift,
+      z:
+        interpolate(
+          transProgress,
+          [0, 1],
+          [prevLine.camera.z, currentLine.camera.z]
+        ) - drift,
       rx: interpolate(
         transProgress,
         [0, 1],
@@ -117,7 +122,7 @@ export const SpatialWorld: React.FC<SpatialWorldProps> = ({ accentColor }) => {
           `,
         }}
       >
-        {/* Parallax Ground Grid & Waypoint Markers */}
+        {/* Parallax Ambient Storm Particles */}
         <WorldParallaxElements accentColor={accentColor} />
 
         {/* 3D Positioned Lyric Waypoints */}
@@ -125,11 +130,14 @@ export const SpatialWorld: React.FC<SpatialWorldProps> = ({ accentColor }) => {
           const isCurrent = line.id === LYRICS[activeIndex]?.id;
           const pos = line.camera;
 
-          // Fade out distant past/future cards
           const lineStartF = Math.round(line.startSec * fps);
           const lineEndF = Math.round(line.endSec * fps);
-          const isFarPast = frame > lineEndF + 15;
-          const isFarFuture = frame < lineStartF - 15;
+          const localFrame = frame - lineStartF;
+          const lineDuration = lineEndF - lineStartF;
+
+          // Fade out distant past/future cards
+          const isFarPast = frame > lineEndF + 20;
+          const isFarFuture = frame < lineStartF - 20;
 
           if (isFarPast || isFarFuture) return null;
 
@@ -152,14 +160,19 @@ export const SpatialWorld: React.FC<SpatialWorldProps> = ({ accentColor }) => {
                   rotateZ(${pos.rz}deg)
                 `,
                 opacity: isCurrent ? 1 : 0.25,
-                filter: isCurrent ? "none" : "blur(4px)",
+                filter: isCurrent ? "none" : "blur(5px)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 pointerEvents: "none",
               }}
             >
-              <KineticAnimator line={line} accentColor={accentColor} />
+              <KineticAnimator
+                line={line}
+                localFrame={localFrame}
+                lineDuration={lineDuration}
+                accentColor={accentColor}
+              />
             </div>
           );
         })}
