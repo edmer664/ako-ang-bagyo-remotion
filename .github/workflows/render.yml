@@ -37,8 +37,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg libnss3 libatk1.0-0 libatk-bridge2.0-0 \
-            libcups2 libgbm1 libasound2 libpangocairo-1.0-0 libxss1 libxcomposite1 \
-            libxcursor1 libxdamage1 libxrandr2
+            libcups2 libgbm1 libpangocairo-1.0-0 libxss1 libxcomposite1 \
+            libxcursor1 libxdamage1 libxrandr2 || true
 
       - name: Install NPM dependencies
         run: npm ci
