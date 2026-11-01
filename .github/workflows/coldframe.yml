@@ -1,0 +1,34 @@
+# Render this Remotion project in the cloud with coldframe.
+# Free GitHub Actions runners render in parallel, every frame is verified, and the joined MP4 is delivered.
+
+name: coldframe
+
+on:
+  workflow_dispatch:
+    inputs:
+      composition:
+        description: "Composition id"
+        required: true
+        default: "AkoAngBagyo"
+      chunks:
+        description: "Parallel machines (1-20)"
+        default: "8"
+      props:
+        description: "Input props (JSON)"
+        default: "{}"
+      output-name:
+        description: "Output file name (optional)"
+        default: "ako-ang-bagyo.mp4"
+
+jobs:
+  render:
+    uses: Razee4315/coldframe/.github/workflows/render.yml@v1
+    with:
+      composition: ${{ inputs.composition }}
+      chunks: ${{ fromJSON(inputs.chunks) }}
+      props: ${{ inputs.props }}
+      output-name: ${{ inputs.output-name }}
+      project-dir: my-video
+      entry-point: src/index.ts
+      gl: swangle
+      frame-timeout: 180000
