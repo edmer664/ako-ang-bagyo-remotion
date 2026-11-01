@@ -1,92 +1,24 @@
 import React, { useMemo } from "react";
-import {
-  Easing,
-  interpolate,
-  useCurrentFrame,
-  useVideoConfig,
-} from "remotion";
-import { LYRICS, LyricLine, SpatialCoord } from "../lyricsData";
+import { useCurrentFrame, useVideoConfig } from "remotion";
+import { LYRICS, SpatialCoord } from "../lyricsData";
 import { KineticAnimator } from "./KineticAnimators";
 import { WorldParallaxElements } from "./WorldParallaxElements";
 
 interface SpatialWorldProps {
+  camera: SpatialCoord;
+  activeSection: string;
+  activeIndex: number;
   accentColor: string;
 }
 
-export const SpatialWorld: React.FC<SpatialWorldProps> = ({ accentColor }) => {
+export const SpatialWorld: React.FC<SpatialWorldProps> = ({
+  camera,
+  activeSection,
+  activeIndex,
+  accentColor,
+}) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-
-  const currentTimeSec = frame / fps;
-
-  // Find active line index (monotonic search so it never resets to 0 during gaps)
-  const activeIndex = useMemo(() => {
-    for (let i = 0; i < LYRICS.length; i++) {
-      if (currentTimeSec < LYRICS[i].endSec) {
-        return i;
-      }
-    }
-    return LYRICS.length - 1;
-  }, [currentTimeSec]);
-
-  // Compute smooth camera position in 3D world
-  const camera = useMemo<SpatialCoord>(() => {
-    const currentLine = LYRICS[activeIndex];
-    const prevLine: LyricLine =
-      activeIndex > 0 ? LYRICS[activeIndex - 1] : currentLine;
-
-    const startF = Math.round(currentLine.startSec * fps);
-    const localF = frame - startF;
-
-    // Transition duration from prev waypoint to current (12-16 frames)
-    const lineDurationFrames = Math.round(
-      (currentLine.endSec - currentLine.startSec) * fps
-    );
-    const transDuration = Math.min(16, Math.max(8, Math.floor(lineDurationFrames * 0.35)));
-
-    const transProgress = interpolate(localF, [0, transDuration], [0, 1], {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-      easing: Easing.bezier(0.16, 1, 0.3, 1),
-    });
-
-    // Subtle drift during hold for organic motion
-    const drift = Math.sin((localF / fps) * 0.8) * 12;
-
-    return {
-      x: interpolate(
-        transProgress,
-        [0, 1],
-        [prevLine.camera.x, currentLine.camera.x]
-      ),
-      y: interpolate(
-        transProgress,
-        [0, 1],
-        [prevLine.camera.y, currentLine.camera.y]
-      ),
-      z:
-        interpolate(
-          transProgress,
-          [0, 1],
-          [prevLine.camera.z, currentLine.camera.z]
-        ) - drift,
-      rx: interpolate(
-        transProgress,
-        [0, 1],
-        [prevLine.camera.rx, currentLine.camera.rx]
-      ),
-      ry: interpolate(
-        transProgress,
-        [0, 1],
-        [prevLine.camera.ry, currentLine.camera.ry]
-      ),
-      rz: interpolate(
-        transProgress,
-        [0, 1],
-        [prevLine.camera.rz, currentLine.camera.rz]
-      ),
-    };
-  }, [activeIndex, frame, fps]);
 
   // Visible window of lyric items (render surrounding lines for parallax)
   const visibleLines = useMemo(() => {
@@ -122,8 +54,13 @@ export const SpatialWorld: React.FC<SpatialWorldProps> = ({ accentColor }) => {
           `,
         }}
       >
-        {/* Parallax Ambient Storm Particles */}
-        <WorldParallaxElements accentColor={accentColor} />
+        {/* Parallax Scene Elements matching the Storyboard */}
+        <WorldParallaxElements
+          accentColor={accentColor}
+          cameraZ={camera.z}
+          frame={frame}
+          activeSection={activeSection}
+        />
 
         {/* 3D Positioned Lyric Waypoints */}
         {visibleLines.map((line) => {

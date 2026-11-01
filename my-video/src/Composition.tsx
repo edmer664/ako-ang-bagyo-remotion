@@ -11,7 +11,13 @@ import {
 import { Lightning } from "./components/Lightning";
 import { SpatialWorld } from "./components/SpatialWorld";
 import { StormAtmosphere } from "./components/StormAtmosphere";
-import { FPS, LYRICS, TOTAL_FRAMES } from "./lyricsData";
+import {
+  FPS,
+  getActiveLineIndex,
+  getCameraForFrame,
+  LYRICS,
+  TOTAL_FRAMES,
+} from "./lyricsData";
 
 export const AkoAngBagyoComposition: React.FC = () => {
   const frame = useCurrentFrame();
@@ -19,15 +25,17 @@ export const AkoAngBagyoComposition: React.FC = () => {
 
   const currentTimeSec = frame / fps;
 
-  // Active line for atmosphere & lighting
-  const activeLine = useMemo(() => {
-    for (let i = 0; i < LYRICS.length; i++) {
-      if (currentTimeSec < LYRICS[i].endSec) {
-        return LYRICS[i];
-      }
-    }
-    return LYRICS[LYRICS.length - 1];
+  // Active line index and data
+  const activeIndex = useMemo(() => {
+    return getActiveLineIndex(currentTimeSec);
   }, [currentTimeSec]);
+
+  const activeLine = LYRICS[activeIndex];
+
+  // 3D Camera coordinates for this exact frame
+  const camera = useMemo(() => {
+    return getCameraForFrame(frame, fps);
+  }, [frame, fps]);
 
   // Section accent color
   const accentColor = useMemo(() => {
@@ -44,6 +52,16 @@ export const AkoAngBagyoComposition: React.FC = () => {
         return "#38bdf8";
     }
   }, [activeLine.section]);
+
+  // Lightning active flag for atmosphere ambient lighting
+  const isLightningActive = useMemo(() => {
+    const activeLightningLine = LYRICS.find((l) => {
+      if (!l.hasLightning) return false;
+      const startF = Math.round(l.startSec * fps);
+      return frame >= startF && frame <= startF + 14;
+    });
+    return !!activeLightningLine;
+  }, [frame, fps]);
 
   // Dynamic Camera Shake on impact
   const shakeOffset = useMemo(() => {
@@ -80,22 +98,33 @@ export const AkoAngBagyoComposition: React.FC = () => {
       {/* Background Audio */}
       <Audio src={staticFile("audio.mp3")} />
 
-      {/* Atmospheric Background */}
+      {/* Camera-Coupled Dynamic Storm Atmosphere */}
       <StormAtmosphere
         section={activeLine?.section || "intro"}
-        globalTimeSec={currentTimeSec}
+        camera={camera}
+        accentColor={accentColor}
+        isLightningActive={isLightningActive}
       />
 
-      {/* 3D Continuous World Navigation */}
-      <SpatialWorld accentColor={accentColor} />
+      {/* 3D Continuous World Navigation & Storyboard Parallax Elements */}
+      <SpatialWorld
+        camera={camera}
+        activeSection={activeLine?.section || "intro"}
+        activeIndex={activeIndex}
+        accentColor={accentColor}
+      />
 
       {/* Lightning Strike Sequences */}
       {LYRICS.map((line) => {
         if (!line.hasLightning) return null;
         const fromFrame = Math.round(line.startSec * fps);
         return (
-          <Sequence key={`lightning-${line.id}`} from={fromFrame} durationInFrames={20}>
-            <Lightning intensity={1.2} color={accentColor} />
+          <Sequence
+            key={`lightning-${line.id}`}
+            from={fromFrame}
+            durationInFrames={20}
+          >
+            <Lightning intensity={1.3} color={accentColor} />
           </Sequence>
         );
       })}

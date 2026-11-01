@@ -1,3 +1,5 @@
+import { Easing, interpolate } from "remotion";
+
 export interface SpatialCoord {
   x: number;
   y: number;
@@ -673,3 +675,73 @@ export const LYRICS: LyricLine[] = [
     hasLightning: true,
   },
 ];
+
+export const getActiveLineIndex = (timeSec: number): number => {
+  for (let i = 0; i < LYRICS.length; i++) {
+    if (timeSec < LYRICS[i].endSec) {
+      return i;
+    }
+  }
+  return LYRICS.length - 1;
+};
+
+export const getCameraForFrame = (frame: number, fps: number): SpatialCoord => {
+  const currentTimeSec = frame / fps;
+  const activeIndex = getActiveLineIndex(currentTimeSec);
+  const currentLine = LYRICS[activeIndex];
+  const prevLine = activeIndex > 0 ? LYRICS[activeIndex - 1] : currentLine;
+
+  const startF = Math.round(currentLine.startSec * fps);
+  const localF = frame - startF;
+
+  const lineDurationFrames = Math.round(
+    (currentLine.endSec - currentLine.startSec) * fps
+  );
+  const transDuration = Math.min(
+    16,
+    Math.max(8, Math.floor(lineDurationFrames * 0.35))
+  );
+
+  const transProgress = interpolate(localF, [0, transDuration], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+    easing: Easing.bezier(0.16, 1, 0.3, 1),
+  });
+
+  const drift = Math.sin((localF / fps) * 0.8) * 12;
+
+  return {
+    x: interpolate(
+      transProgress,
+      [0, 1],
+      [prevLine.camera.x, currentLine.camera.x]
+    ),
+    y: interpolate(
+      transProgress,
+      [0, 1],
+      [prevLine.camera.y, currentLine.camera.y]
+    ),
+    z:
+      interpolate(
+        transProgress,
+        [0, 1],
+        [prevLine.camera.z, currentLine.camera.z]
+      ) - drift,
+    rx: interpolate(
+      transProgress,
+      [0, 1],
+      [prevLine.camera.rx, currentLine.camera.rx]
+    ),
+    ry: interpolate(
+      transProgress,
+      [0, 1],
+      [prevLine.camera.ry, currentLine.camera.ry]
+    ),
+    rz: interpolate(
+      transProgress,
+      [0, 1],
+      [prevLine.camera.rz, currentLine.camera.rz]
+    ),
+  };
+};
+
