@@ -36,8 +36,6 @@ export const ThreeStormAtmosphere: React.FC<ThreeAtmosphereProps> = ({
     dustMaterial: THREE.PointsMaterial;
     pointLight: THREE.PointLight;
     ambientLight: THREE.AmbientLight;
-    skyMesh: THREE.Mesh;
-    skyMaterial: THREE.MeshBasicMaterial;
   } | null>(null);
 
   // Section-specific wind, rain, and particle dynamics
@@ -167,16 +165,6 @@ export const ThreeStormAtmosphere: React.FC<ThreeAtmosphereProps> = ({
     pointLight.position.set(0, 300, 200);
     scene.add(pointLight);
 
-    // 1. Sky Sphere for 3D Atmospheric Depth
-    const skyGeo = new THREE.SphereGeometry(3800, 24, 16);
-    const skyMat = new THREE.MeshBasicMaterial({
-      color: 0x060f1c,
-      side: THREE.BackSide,
-      fog: false,
-    });
-    const skyMesh = new THREE.Mesh(skyGeo, skyMat);
-    scene.add(skyMesh);
-
     // 2. Realistic 3D Rain Line Segments (Head & Tail)
     const rainGeo = new THREE.BufferGeometry();
     const rainPositions = new Float32Array(RAIN_COUNT * 6);
@@ -242,8 +230,6 @@ export const ThreeStormAtmosphere: React.FC<ThreeAtmosphereProps> = ({
       dustMaterial,
       pointLight,
       ambientLight,
-      skyMesh,
-      skyMaterial: skyMat,
     };
 
     return () => {
@@ -252,8 +238,6 @@ export const ThreeStormAtmosphere: React.FC<ThreeAtmosphereProps> = ({
       dustGeo.dispose();
       dustMaterial.dispose();
       particleTexture.dispose();
-      skyGeo.dispose();
-      skyMat.dispose();
       renderer.dispose();
       contextRef.current = null;
     };
@@ -277,7 +261,6 @@ export const ThreeStormAtmosphere: React.FC<ThreeAtmosphereProps> = ({
       dustMaterial,
       pointLight,
       ambientLight,
-      skyMaterial,
     } = ctx;
 
     // Couple Three.js Camera directly to Remotion's 3D coordinates
@@ -287,9 +270,6 @@ export const ThreeStormAtmosphere: React.FC<ThreeAtmosphereProps> = ({
     threeCamera.rotation.y = (-camera.ry * Math.PI) / 180;
     threeCamera.rotation.x = (-camera.rx * Math.PI) / 180;
     threeCamera.rotation.z = (-camera.rz * Math.PI) / 180;
-
-    // Background sky color adjusts smoothly with section
-    skyMaterial.color.setHex(sectionDynamics.skyColor);
 
     // Lightning flash illumination
     if (isLightningActive) {
