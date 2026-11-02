@@ -1,6 +1,8 @@
 import React, { useLayoutEffect, useMemo, useRef } from "react";
 import { random, useCurrentFrame, useVideoConfig } from "remotion";
 import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { STORM_MONOLITH_BASE64 } from "../assets/stormMonolithBase64";
 import { SpatialCoord } from "../lyricsData";
 
 interface ThreeAtmosphereProps {
@@ -36,6 +38,7 @@ export const ThreeStormAtmosphere: React.FC<ThreeAtmosphereProps> = ({
     dustMaterial: THREE.PointsMaterial;
     pointLight: THREE.PointLight;
     ambientLight: THREE.AmbientLight;
+    monolithGroup: THREE.Group | null;
   } | null>(null);
 
   // Section-specific wind, rain, and particle dynamics
@@ -217,6 +220,32 @@ export const ThreeStormAtmosphere: React.FC<ThreeAtmosphereProps> = ({
     const dustPoints = new THREE.Points(dustGeo, dustMaterial);
     scene.add(dustPoints);
 
+    // 4. Load & Instantiate the 3D Blender Storm Monolith & Shards
+    let monolithGroup: THREE.Group | null = null;
+    try {
+      const binaryString = atob(STORM_MONOLITH_BASE64);
+      const bytes = new Uint8Array(binaryString.length);
+      for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+      }
+      const loader = new GLTFLoader();
+      loader.parse(
+        bytes.buffer,
+        "",
+        (gltf) => {
+          monolithGroup = gltf.scene;
+          monolithGroup.scale.set(45, 45, 45);
+          monolithGroup.position.set(0, 0, -850);
+          scene.add(monolithGroup);
+        },
+        (error) => {
+          console.warn("Failed to parse StormMonolith GLB:", error);
+        }
+      );
+    } catch (err) {
+      console.warn("Error loading StormMonolith:", err);
+    }
+
     contextRef.current = {
       renderer,
       scene,
@@ -230,9 +259,23 @@ export const ThreeStormAtmosphere: React.FC<ThreeAtmosphereProps> = ({
       dustMaterial,
       pointLight,
       ambientLight,
+      monolithGroup,
     };
 
     return () => {
+      if (monolithGroup) {
+        (monolithGroup as THREE.Group).traverse((child: any) => {
+          if (child.isMesh) {
+            child.geometry?.dispose();
+            if (Array.isArray(child.material)) {
+              child.material.forEach((m: any) => m.dispose());
+            } else {
+              child.material?.dispose();
+            }
+          }
+        });
+        scene.remove(monolithGroup);
+      }
       rainGeo.dispose();
       rainMat.dispose();
       dustGeo.dispose();
@@ -261,7 +304,27 @@ export const ThreeStormAtmosphere: React.FC<ThreeAtmosphereProps> = ({
       dustMaterial,
       pointLight,
       ambientLight,
+      monolithGroup,
     } = ctx;
+
+    // Animate the 3D Blender Storm Monolith in deep atmospheric space
+    if (monolithGroup) {
+      monolithGroup.rotation.y = frame * 0.012;
+      monolithGroup.rotation.x = Math.sin(frame * 0.009) * 0.14;
+      monolithGroup.rotation.z = Math.cos(frame * 0.011) * 0.08;
+      monolithGroup.position.x = Math.sin(frame * 0.006) * 110;
+      monolithGroup.position.y = Math.cos(frame * 0.008) * 60 - 20;
+      monolithGroup.position.z = -920 + Math.sin(frame * 0.014) * 50;
+
+      // Pulse emissive core when lightning strikes
+      monolithGroup.traverse((child: any) => {
+        if (child.isMesh && child.material) {
+          if (child.material.emissive) {
+            child.material.emissiveIntensity = isLightningActive ? 3.5 : 1.2;
+          }
+        }
+      });
+    }
 
     // Couple Three.js Camera directly to Remotion's 3D coordinates
     // Scaling matches CSS 3D perspective
