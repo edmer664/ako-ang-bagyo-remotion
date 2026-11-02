@@ -11,6 +11,26 @@ interface BackgroundMonolithProps {
   isLightningActive?: boolean;
 }
 
+// Hermite smoothstep for cinematic in/out transitions
+function getPresence(
+  frame: number,
+  start: number,
+  fadeIn: number,
+  fadeOut: number,
+  end: number
+): number {
+  if (frame <= start || frame >= end) return 0;
+  if (frame < fadeIn) {
+    const t = (frame - start) / (fadeIn - start);
+    return t * t * (3 - 2 * t);
+  }
+  if (frame > fadeOut) {
+    const t = (end - frame) / (end - fadeOut);
+    return t * t * (3 - 2 * t);
+  }
+  return 1;
+}
+
 export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
   camera,
   accentColor,
@@ -33,6 +53,11 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
     hemiLight: THREE.HemisphereLight;
     keyLight: THREE.DirectionalLight;
     rimLight: THREE.DirectionalLight;
+    monolithLight: THREE.PointLight;
+    yeroLight: THREE.PointLight;
+    polaroidLight: THREE.PointLight;
+    demolitionLight: THREE.PointLight;
+    crystalLight: THREE.PointLight;
   } | null>(null);
 
   // Initialize WebGL Scene
@@ -55,40 +80,49 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
     }
 
     const scene = new THREE.Scene();
+
+    // Atmospheric depth fog - seamlessly merges distant geometry with storm horizon
+    scene.fog = new THREE.FogExp2(0x060c18, 0.0014);
+
     const threeCamera = new THREE.PerspectiveCamera(55, width / height, 10, 5000);
     threeCamera.rotation.order = "YXZ";
     threeCamera.position.set(0, 0, 500);
 
-    const hemiLight = new THREE.HemisphereLight(0xe0f2fe, 0x1e293b, 3.5);
+    // Global ambient & directional illumination rig (ensures zero black assets)
+    const hemiLight = new THREE.HemisphereLight(0xdbeafe, 0x0f172a, 3.5);
     scene.add(hemiLight);
 
     const keyLight = new THREE.DirectionalLight(0xffffff, 4.2);
     keyLight.position.set(400, 500, 400);
     scene.add(keyLight);
 
-    const rimLight = new THREE.DirectionalLight(0x00e5ff, 3.5);
+    const rimLight = new THREE.DirectionalLight(0x00f0ff, 3.5);
     rimLight.position.set(-500, -200, 200);
     scene.add(rimLight);
 
     const pointLight = new THREE.PointLight(0x00f0ff, 2.5, 2500);
-    pointLight.position.set(200, 100, -100);
+    pointLight.position.set(0, 150, 0);
     scene.add(pointLight);
 
-    // Dedicated local accent point lights to sculpt each asset group with dramatic illumination
-    const monolithLight = new THREE.PointLight(0x00f0ff, 3.5, 800);
-    monolithLight.position.set(500, 120, -100);
+    // Dedicated local accent lights for each story group
+    const monolithLight = new THREE.PointLight(0x00f0ff, 3.5, 900);
+    monolithLight.position.set(480, 140, -120);
     scene.add(monolithLight);
 
-    const polaroidLight = new THREE.PointLight(0x7dd3fc, 2.8, 700);
-    polaroidLight.position.set(-490, 30, -80);
+    const yeroLight = new THREE.PointLight(0x38bdf8, 3.0, 900);
+    yeroLight.position.set(0, -220, -80);
+    scene.add(yeroLight);
+
+    const polaroidLight = new THREE.PointLight(0x7dd3fc, 3.0, 800);
+    polaroidLight.position.set(-460, 20, -80);
     scene.add(polaroidLight);
 
-    const rebarLight = new THREE.PointLight(0xf97316, 3.0, 700);
-    rebarLight.position.set(490, -150, -80);
-    scene.add(rebarLight);
+    const demolitionLight = new THREE.PointLight(0xf97316, 3.5, 800);
+    demolitionLight.position.set(460, -140, -80);
+    scene.add(demolitionLight);
 
-    const crystalLight = new THREE.PointLight(0x38bdf8, 3.5, 800);
-    crystalLight.position.set(-470, 160, -90);
+    const crystalLight = new THREE.PointLight(0x00f0ff, 3.8, 900);
+    crystalLight.position.set(-450, 150, -90);
     scene.add(crystalLight);
 
     // Dedicated clusters for each storyboard asset category
@@ -121,7 +155,7 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
 
                 if (childName.includes("monolith")) {
                   child.material = new THREE.MeshStandardMaterial({
-                    color: new THREE.Color(0x384860), // Luminous slate blue-grey
+                    color: new THREE.Color(0x384a66), // Luminous slate blue-grey
                     metalness: 0.2,
                     roughness: 0.28,
                     emissive: new THREE.Color(0x00f0ff),
@@ -137,7 +171,7 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
                   });
                 } else if (childName.includes("yero")) {
                   child.material = new THREE.MeshStandardMaterial({
-                    color: new THREE.Color(0xdce6f2), // Bright galvanized silver zinc
+                    color: new THREE.Color(0xdce7f2), // Bright galvanized silver zinc
                     metalness: 0.35,
                     roughness: 0.25,
                     emissive: new THREE.Color(0x223a54),
@@ -145,9 +179,8 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
                     side: THREE.DoubleSide,
                   });
                 } else if (childName.includes("polaroid")) {
-                  // Clean polaroid photo with glowing inner storm gradient
                   child.material = new THREE.MeshStandardMaterial({
-                    color: new THREE.Color(0xffffff), // Bright polaroid white border
+                    color: new THREE.Color(0xffffff), // Clean white polaroid border
                     metalness: 0.05,
                     roughness: 0.4,
                     emissive: new THREE.Color(0x38bdf8),
@@ -156,7 +189,7 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
                   });
                 } else if (childName.includes("concrete")) {
                   child.material = new THREE.MeshStandardMaterial({
-                    color: new THREE.Color(0xb0bccb), // Bright weathered light concrete
+                    color: new THREE.Color(0xb2bfce), // Bright weathered light concrete
                     metalness: 0.05,
                     roughness: 0.7,
                     emissive: new THREE.Color(0x222d3d),
@@ -215,30 +248,30 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
             }
           });
 
-          // 1. Monolith Cluster: Upper-right celestial storm sky - imposing, prominent, close
-          monolithGroup.scale.set(65, 65, 65);
-          monolithGroup.position.set(510, 120, -180);
+          // 1. Monolith: Upper-right celestial storm sky
+          monolithGroup.scale.set(58, 58, 58);
+          monolithGroup.position.set(480, 130, -200);
           scene.add(monolithGroup);
 
-          // 2. Tumbling Yero: Lower horizon below text baseline - large, spinning corrugated galvanized sheets
-          yeroGroup.scale.set(120, 120, 120);
+          // 2. Tumbling Yero: Lower horizon below text baseline
+          yeroGroup.scale.set(115, 115, 115);
           yeroGroup.position.set(0, -250, -140);
           scene.add(yeroGroup);
 
-          // 3. Memory Polaroid: Left atmospheric flank - large, crisp white frame with cyan photo
-          polaroidGroup.scale.set(160, 160, 160);
-          polaroidGroup.position.set(-510, 30, -160);
+          // 3. Memory Polaroid: Left atmospheric flank
+          polaroidGroup.scale.set(155, 155, 155);
+          polaroidGroup.position.set(-480, 20, -140);
           polaroidGroup.rotation.z = -0.22;
           scene.add(polaroidGroup);
 
-          // 4. Demolition Concrete: Lower right flank - bold cracked concrete with bright orange rebar
-          demolitionGroup.scale.set(110, 110, 110);
-          demolitionGroup.position.set(510, -170, -150);
+          // 4. Demolition Concrete: Lower right flank
+          demolitionGroup.scale.set(105, 105, 105);
+          demolitionGroup.position.set(480, -160, -150);
           scene.add(demolitionGroup);
 
-          // 5. Crystal Spike: Upper-left thunder flank - towering electric crystalline spike
-          crystalGroup.scale.set(90, 90, 90);
-          crystalGroup.position.set(-490, 170, -160);
+          // 5. Crystal Spike: Upper-left thunder flank
+          crystalGroup.scale.set(85, 85, 85);
+          crystalGroup.position.set(-470, 160, -160);
           scene.add(crystalGroup);
         },
         (error) => {
@@ -262,6 +295,11 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
       hemiLight,
       keyLight,
       rimLight,
+      monolithLight,
+      yeroLight,
+      polaroidLight,
+      demolitionLight,
+      crystalLight,
     };
 
     return () => {
@@ -283,7 +321,7 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
     };
   }, [width, height]);
 
-  // Per-frame animation
+  // Per-frame immersive choreography & narrative staging
   useLayoutEffect(() => {
     const ctx = contextRef.current;
     if (!ctx) return;
@@ -301,6 +339,11 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
       hemiLight,
       keyLight,
       rimLight,
+      monolithLight,
+      yeroLight,
+      polaroidLight,
+      demolitionLight,
+      crystalLight,
     } = ctx;
 
     // Follow camera orientation with smooth parallax scaling
@@ -310,77 +353,159 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
     threeCamera.rotation.x = (-camera.rx * Math.PI) / 180 * 0.7;
     threeCamera.rotation.z = (-camera.rz * Math.PI) / 180 * 0.7;
 
+    // =========================================================================
+    // 1. SCENE-BASED NARRATIVE STAGING & PRESENCE FACTORS
+    // =========================================================================
+    // Yero Sheets: Chorus 1 ("Tatangayin ko bawat yero" ~ 58s - 90s, f1740-f2720)
+    const yeroPresence = getPresence(frame, 1740, 1840, 2600, 2720);
+
+    // Memory Polaroid: Verse 2 ("Itinago na litrato" ~ 90s - 118s, f2700-f3560)
+    const polaroidPresence = getPresence(frame, 2700, 2790, 3450, 3560);
+
+    // Concrete Demolition: Chorus 2 ("Gigibain ko mga pader n'yo" ~ 122s - 182s, f3680-f5480)
+    const demolitionPresence = getPresence(frame, 3680, 3800, 5260, 5480);
+
+    // Crystal Spikes: Bridge Climax ("Ako, ako ang bagyo" ~ 184s - 250s, f5520-f7500)
+    const crystalPresence = getPresence(frame, 5520, 5700, 7200, 7500);
+
+    // Monolith: Celestial anchor - dims subtly during intimate Verse 2 to spotlight Polaroid
+    let monolithBasePresence = 0.85;
+    if (frame >= 2700 && frame <= 3560) {
+      monolithBasePresence = 0.35; // Dim to spotlight the Polaroid memory
+    } else if (frame > 5500 && frame < 7200) {
+      monolithBasePresence = 1.2; // Overdrive in Bridge climax
+    }
+
+    // =========================================================================
+    // 2. DYNAMIC SIMULATION & IMMERSIVE LIVING MOTION
+    // =========================================================================
+
     // 1. Monolith: Majestic gyroscopic rotation and hovering drift in upper-right sky
     if (monolithGroup.children.length > 0) {
+      monolithGroup.visible = monolithBasePresence > 0.01;
+      const s = 58 * monolithBasePresence;
+      monolithGroup.scale.set(s, s, s);
+
       monolithGroup.rotation.y = frame * 0.012;
       monolithGroup.rotation.x = Math.sin(frame * 0.007) * 0.1;
-      monolithGroup.position.x = 510 + Math.sin(frame * 0.005) * 25;
-      monolithGroup.position.y = 120 + Math.cos(frame * 0.006) * 20;
+      monolithGroup.position.x = 480 + Math.sin(frame * 0.005) * 25;
+      monolithGroup.position.y = 130 + Math.cos(frame * 0.006) * 20;
 
       monolithGroup.traverse((child: any) => {
         if (child.isMesh && child.material && child.material.emissive) {
-          const isCore = (child.name || "").toLowerCase().includes("core") || (child.name || "").toLowerCase().includes("shard");
+          const isCore =
+            (child.name || "").toLowerCase().includes("core") ||
+            (child.name || "").toLowerCase().includes("shard");
           child.material.emissiveIntensity = isLightningActive
             ? (isCore ? 6.5 : 1.6)
             : (isCore ? 3.2 : 0.5);
         }
       });
+      monolithLight.intensity = 3.5 * monolithBasePresence;
     }
 
-    // 2. Tumbling Yero: Horizontal wind drift across lower horizon under lyrics
+    // 2. Tumbling Yero: Violent hurricane vortex stream sweeping across lower horizon
     if (yeroGroup.children.length > 0) {
-      const windOffset = ((frame * 4.2) % 2400) - 1200;
-      yeroGroup.position.x = windOffset;
-      yeroGroup.position.y = -250 + Math.sin(frame * 0.02) * 15;
+      if (yeroPresence > 0.001) {
+        yeroGroup.visible = true;
+        const s = 115 * yeroPresence;
+        yeroGroup.scale.set(s, s, s);
 
-      yeroGroup.children.forEach((sheet: any, idx) => {
-        sheet.rotation.x = frame * (0.04 + idx * 0.012);
-        sheet.rotation.y = frame * (0.035 + idx * 0.015);
-        sheet.rotation.z = Math.sin(frame * 0.02 + idx) * 0.45;
-      });
+        // Sweeping wind path across the lower horizon under lyrics
+        const windCycle = ((frame * 5.2) % 2400) - 1200;
+        yeroGroup.position.x = windCycle;
+        yeroGroup.position.y = -250 + Math.sin(frame * 0.025) * 18;
+
+        yeroGroup.children.forEach((sheet: any, idx) => {
+          sheet.rotation.x = frame * (0.05 + idx * 0.014);
+          sheet.rotation.y = frame * (0.04 + idx * 0.018);
+          sheet.rotation.z = Math.sin(frame * 0.03 + idx) * 0.55;
+        });
+        yeroLight.intensity = 3.5 * yeroPresence;
+      } else {
+        yeroGroup.visible = false;
+        yeroLight.intensity = 0;
+      }
     }
 
-    // 3. Memory Polaroid: Gentle breathing drift on left flank
+    // 3. Memory Polaroid: Gentle atmospheric fluid drift on left flank in the rain
     if (polaroidGroup.children.length > 0) {
-      polaroidGroup.position.y = 30 + Math.sin(frame * 0.014) * 18;
-      polaroidGroup.position.x = -510 + Math.cos(frame * 0.009) * 15;
-      polaroidGroup.rotation.z = -0.22 + Math.sin(frame * 0.008) * 0.06;
-      polaroidGroup.rotation.y = Math.sin(frame * 0.011) * 0.14;
+      if (polaroidPresence > 0.001) {
+        polaroidGroup.visible = true;
+        const s = 155 * polaroidPresence;
+        polaroidGroup.scale.set(s, s, s);
+
+        // Atmospheric updrafts & gentle fluid rocking
+        polaroidGroup.position.x = -480 + Math.cos(frame * 0.012) * 20;
+        polaroidGroup.position.y = 20 + Math.sin(frame * 0.016) * 25;
+        polaroidGroup.rotation.z = -0.22 + Math.sin(frame * 0.01) * 0.08;
+        polaroidGroup.rotation.y = Math.sin(frame * 0.014) * 0.18;
+        polaroidLight.intensity = 3.2 * polaroidPresence;
+      } else {
+        polaroidGroup.visible = false;
+        polaroidLight.intensity = 0;
+      }
     }
 
-    // 4. Demolition Concrete: Heavy rumble vibration on shockwaves, floating lower right
+    // 4. Demolition Concrete: Heavy structural rumble and shockwave vibration
     if (demolitionGroup.children.length > 0) {
-      const rumble = isLightningActive ? (Math.random() - 0.5) * 8 : 0;
-      demolitionGroup.position.x = 510 + Math.sin(frame * 0.006) * 15;
-      demolitionGroup.position.y = -170 + rumble + Math.cos(frame * 0.008) * 10;
-      demolitionGroup.rotation.y = frame * 0.006;
+      if (demolitionPresence > 0.001) {
+        demolitionGroup.visible = true;
+        const s = 105 * demolitionPresence;
+        demolitionGroup.scale.set(s, s, s);
+
+        // Bass drop structural rumble
+        const bassTremor =
+          (Math.sin(frame * 0.8) * 0.6 + Math.cos(frame * 1.3) * 0.4) *
+          (isLightningActive ? 7 : 3);
+        demolitionGroup.position.x = 480 + Math.sin(frame * 0.008) * 15;
+        demolitionGroup.position.y = -160 + bassTremor + Math.cos(frame * 0.01) * 12;
+        demolitionGroup.rotation.y = frame * 0.008;
+        demolitionGroup.rotation.z = Math.sin(frame * 0.006) * 0.1;
+        demolitionLight.intensity = 3.5 * demolitionPresence;
+      } else {
+        demolitionGroup.visible = false;
+        demolitionLight.intensity = 0;
+      }
     }
 
-    // 5. Crystal Spike: Slow celestial spin with lightning reaction in upper left
+    // 5. Crystal Spike: High-altitude electric spire pulsing with apex lightning
     if (crystalGroup.children.length > 0) {
-      crystalGroup.position.x = -490 + Math.sin(frame * 0.007) * 15;
-      crystalGroup.position.y = 170 + Math.cos(frame * 0.01) * 15;
-      crystalGroup.rotation.y = -frame * 0.018;
-      crystalGroup.rotation.z = Math.sin(frame * 0.012) * 0.2;
+      if (crystalPresence > 0.001) {
+        crystalGroup.visible = true;
+        const s = 85 * crystalPresence;
+        crystalGroup.scale.set(s, s, s);
 
-      crystalGroup.traverse((child: any) => {
-        if (child.isMesh && child.material && child.material.emissive) {
-          child.material.emissiveIntensity = isLightningActive ? 6.5 : 2.8;
-        }
-      });
+        crystalGroup.position.x = -470 + Math.sin(frame * 0.009) * 18;
+        crystalGroup.position.y = 160 + Math.cos(frame * 0.012) * 18;
+        crystalGroup.rotation.y = -frame * 0.02;
+        crystalGroup.rotation.z = Math.sin(frame * 0.015) * 0.18;
+
+        crystalGroup.traverse((child: any) => {
+          if (child.isMesh && child.material && child.material.emissive) {
+            child.material.emissiveIntensity = isLightningActive ? 6.8 : 3.0;
+          }
+        });
+        crystalLight.intensity = 4.0 * crystalPresence;
+      } else {
+        crystalGroup.visible = false;
+        crystalLight.intensity = 0;
+      }
     }
 
-    // Dynamic storm lighting reacting to lightning flashes
+    // =========================================================================
+    // 3. DYNAMIC STORM LIGHTING RIG
+    // =========================================================================
     if (isLightningActive) {
       hemiLight.intensity = 5.5;
-      keyLight.intensity = 8.0;
-      rimLight.intensity = 6.0;
-      pointLight.intensity = 9.0;
+      keyLight.intensity = 8.5;
+      rimLight.intensity = 6.5;
+      pointLight.intensity = 9.5;
       pointLight.color.set(accentColor);
     } else {
-      hemiLight.intensity = 3.2;
-      keyLight.intensity = 4.0;
-      rimLight.intensity = 3.2;
+      hemiLight.intensity = 3.5;
+      keyLight.intensity = 4.2;
+      rimLight.intensity = 3.5;
       pointLight.intensity = 2.5;
       pointLight.color.setHex(0x00f0ff);
     }
