@@ -440,7 +440,7 @@ export const LYRICS: LyricLine[] = [
     section: "bridge",
     emphasisWords: ["HAHAWAKAN"],
     animStyle: "mask-wipe",
-    camera: { x: -300, y: 150, z: -16800, rx: 8, ry: -10, rz: -3 },
+    camera: { x: 0, y: 0, z: -16800, rx: 0, ry: 0, rz: 0 },
   },
   {
     id: "b-2",
@@ -451,7 +451,7 @@ export const LYRICS: LyricLine[] = [
     section: "bridge",
     emphasisWords: ["LUMALAYO"],
     animStyle: "char-stagger",
-    camera: { x: 320, y: -120, z: -17300, rx: -6, ry: 12, rz: 4 },
+    camera: { x: 0, y: 0, z: -17300, rx: 0, ry: 0, rz: 0 },
   },
   {
     id: "b-3",
@@ -462,7 +462,7 @@ export const LYRICS: LyricLine[] = [
     section: "bridge",
     emphasisWords: ["LAHAT NG TAO"],
     animStyle: "blur-focus",
-    camera: { x: -280, y: 200, z: -17800, rx: 10, ry: -8, rz: -3 },
+    camera: { x: 0, y: 0, z: -17800, rx: 0, ry: 0, rz: 0 },
   },
   {
     id: "b-4",
@@ -473,7 +473,7 @@ export const LYRICS: LyricLine[] = [
     section: "bridge",
     emphasisWords: ["NASASAKTAN"],
     animStyle: "dizzy-orbit",
-    camera: { x: 300, y: -150, z: -18300, rx: -10, ry: 14, rz: 5 },
+    camera: { x: 0, y: 0, z: -18300, rx: 0, ry: 0, rz: 0 },
     shakeIntensity: 0.4,
   },
   {
@@ -485,7 +485,7 @@ export const LYRICS: LyricLine[] = [
     section: "bridge",
     emphasisWords: ["NAGSAWA"],
     animStyle: "mask-wipe",
-    camera: { x: -350, y: 140, z: -18800, rx: 8, ry: -12, rz: -4 },
+    camera: { x: 0, y: 0, z: -18800, rx: 0, ry: 0, rz: 0 },
   },
   {
     id: "b-6",
@@ -496,7 +496,7 @@ export const LYRICS: LyricLine[] = [
     section: "bridge",
     emphasisWords: ["WALA NANG NAKATINGIN"],
     animStyle: "char-stagger",
-    camera: { x: 380, y: -160, z: -19300, rx: -8, ry: 15, rz: 5 },
+    camera: { x: 0, y: 0, z: -19300, rx: 0, ry: 0, rz: 0 },
   },
   {
     id: "b-7",
@@ -507,7 +507,7 @@ export const LYRICS: LyricLine[] = [
     section: "bridge",
     emphasisWords: ["'DI NA NAKAKATAWA"],
     animStyle: "blur-focus",
-    camera: { x: -320, y: 180, z: -19800, rx: 10, ry: -10, rz: -3 },
+    camera: { x: 0, y: 0, z: -19800, rx: 0, ry: 0, rz: 0 },
   },
   {
     id: "b-8",

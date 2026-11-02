@@ -85,7 +85,7 @@
   },
   {
     "id": "v1-2",
-    "orientation": "diagonal-down",
+    "orientation": "horizontal",
     "words": [
       {
         "word": "Hindi",
@@ -625,7 +625,7 @@
   },
   {
     "id": "v2-6",
-    "orientation": "diagonal-down",
+    "orientation": "horizontal",
     "words": [
       {
         "word": "Tinatali",
@@ -763,7 +763,7 @@
   },
   {
     "id": "c2-2",
-    "orientation": "diagonal-down",
+    "orientation": "horizontal",
     "words": [
       {
         "word": "Bulong",
@@ -895,7 +895,7 @@
   },
   {
     "id": "c2-5",
-    "orientation": "diagonal-down",
+    "orientation": "horizontal",
     "words": [
       {
         "word": "Dilim",
@@ -1207,7 +1207,7 @@
   },
   {
     "id": "b-4",
-    "orientation": "diagonal-down",
+    "orientation": "horizontal",
     "words": [
       {
         "word": "Sa",
@@ -1339,7 +1339,7 @@
   },
   {
     "id": "b-7",
-    "orientation": "diagonal-down",
+    "orientation": "horizontal",
     "words": [
       {
         "word": "'Pag",

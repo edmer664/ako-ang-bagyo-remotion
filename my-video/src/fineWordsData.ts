@@ -52,7 +52,7 @@ export const FINE_WORD_DATA: Record<string, LineWordData> = {
   },
   "v1-2": {
     id: "v1-2",
-    orientation: "diagonal-down",
+    orientation: "horizontal",
     words: [
       { word: "Hindi", startSec: 32.22, endSec: 32.62, isEmphasis: true },
       { word: "ko", startSec: 32.62, endSec: 32.82, isEmphasis: false },
@@ -227,7 +227,7 @@ export const FINE_WORD_DATA: Record<string, LineWordData> = {
   },
   "v2-6": {
     id: "v2-6",
-    orientation: "diagonal-down",
+    orientation: "horizontal",
     words: [
       { word: "Tinatali", startSec: 109.00, endSec: 109.55, isEmphasis: false },
       { word: "mo", startSec: 109.55, endSec: 109.70, isEmphasis: false },
@@ -270,7 +270,7 @@ export const FINE_WORD_DATA: Record<string, LineWordData> = {
   },
   "c2-2": {
     id: "c2-2",
-    orientation: "diagonal-down",
+    orientation: "horizontal",
     words: [
       { word: "Bulong", startSec: 131.42, endSec: 131.78, isEmphasis: true },
       { word: "ko", startSec: 131.78, endSec: 131.98, isEmphasis: false },
@@ -307,7 +307,7 @@ export const FINE_WORD_DATA: Record<string, LineWordData> = {
   },
   "c2-5": {
     id: "c2-5",
-    orientation: "diagonal-down",
+    orientation: "horizontal",
     words: [
       { word: "Dilim", startSec: 148.85, endSec: 149.25, isEmphasis: true },
       { word: "ng", startSec: 149.25, endSec: 149.35, isEmphasis: false },
@@ -399,7 +399,7 @@ export const FINE_WORD_DATA: Record<string, LineWordData> = {
   },
   "b-4": {
     id: "b-4",
-    orientation: "diagonal-down",
+    orientation: "horizontal",
     words: [
       { word: "Sa", startSec: 194.12, endSec: 194.25, isEmphasis: false },
       { word: "tuwing", startSec: 194.25, endSec: 194.55, isEmphasis: false },
@@ -436,7 +436,7 @@ export const FINE_WORD_DATA: Record<string, LineWordData> = {
   },
   "b-7": {
     id: "b-7",
-    orientation: "diagonal-down",
+    orientation: "horizontal",
     words: [
       { word: "'Pag", startSec: 203.35, endSec: 203.55, isEmphasis: false },
       { word: "hindi", startSec: 203.55, endSec: 203.85, isEmphasis: false },
