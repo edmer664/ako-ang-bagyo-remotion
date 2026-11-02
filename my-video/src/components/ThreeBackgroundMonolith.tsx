@@ -24,7 +24,11 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
     renderer: THREE.WebGLRenderer;
     scene: THREE.Scene;
     threeCamera: THREE.PerspectiveCamera;
-    monolithGroup: THREE.Group | null;
+    monolithGroup: THREE.Group;
+    yeroGroup: THREE.Group;
+    polaroidGroup: THREE.Group;
+    demolitionGroup: THREE.Group;
+    crystalGroup: THREE.Group;
     pointLight: THREE.PointLight;
     ambientLight: THREE.AmbientLight;
   } | null>(null);
@@ -53,14 +57,20 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
     threeCamera.rotation.order = "YXZ";
     threeCamera.position.set(0, 0, 500);
 
-    const ambientLight = new THREE.AmbientLight(0x2a3d54, 1.2);
+    const ambientLight = new THREE.AmbientLight(0x2a3d54, 1.3);
     scene.add(ambientLight);
 
-    const pointLight = new THREE.PointLight(0x00f0ff, 1.5, 3500);
+    const pointLight = new THREE.PointLight(0x00f0ff, 1.8, 3800);
     pointLight.position.set(300, 200, -400);
     scene.add(pointLight);
 
-    let monolithGroup: THREE.Group | null = null;
+    // Dedicated clusters for each storyboard asset category
+    const monolithGroup = new THREE.Group();
+    const yeroGroup = new THREE.Group();
+    const polaroidGroup = new THREE.Group();
+    const demolitionGroup = new THREE.Group();
+    const crystalGroup = new THREE.Group();
+
     try {
       const binaryString = atob(STORM_MONOLITH_BASE64);
       const bytes = new Uint8Array(binaryString.length);
@@ -72,19 +82,61 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
         bytes.buffer,
         "",
         (gltf) => {
-          monolithGroup = gltf.scene;
-          // Scaled to a balanced monumental size (22x)
+          const rawObjects = [...gltf.scene.children];
+
+          rawObjects.forEach((obj) => {
+            const name = obj.name;
+            if (
+              name.includes("StormMonolith") ||
+              name.includes("InnerPlasmaCore") ||
+              name.includes("OrbitalShard")
+            ) {
+              monolithGroup.add(obj);
+            } else if (name.includes("TumblingYero")) {
+              yeroGroup.add(obj);
+            } else if (name.includes("MemoryPolaroid")) {
+              polaroidGroup.add(obj);
+            } else if (name.includes("ConcreteBlock") || name.includes("RebarRod")) {
+              demolitionGroup.add(obj);
+            } else if (name.includes("CrystalSpike")) {
+              crystalGroup.add(obj);
+            } else {
+              monolithGroup.add(obj);
+            }
+          });
+
+          // 1. Monolith Cluster: Upper-right celestial storm sky
           monolithGroup.scale.set(22, 22, 22);
-          // Positioned off-center in the upper-right background sky
-          monolithGroup.position.set(460, 120, -950);
+          monolithGroup.position.set(480, 140, -960);
           scene.add(monolithGroup);
+
+          // 2. Tumbling Yero: Lower horizon below text baseline
+          yeroGroup.scale.set(20, 20, 20);
+          yeroGroup.position.set(0, -340, -850);
+          scene.add(yeroGroup);
+
+          // 3. Memory Polaroid: Left atmospheric flank
+          polaroidGroup.scale.set(40, 40, 40);
+          polaroidGroup.position.set(-520, 80, -880);
+          polaroidGroup.rotation.z = -0.22;
+          scene.add(polaroidGroup);
+
+          // 4. Demolition Concrete: Far right lower flank
+          demolitionGroup.scale.set(28, 28, 28);
+          demolitionGroup.position.set(580, -180, -900);
+          scene.add(demolitionGroup);
+
+          // 5. Crystal Spike: Far upper-left thunder core
+          crystalGroup.scale.set(28, 28, 28);
+          crystalGroup.position.set(-480, 180, -920);
+          scene.add(crystalGroup);
         },
         (error) => {
-          console.warn("Failed to parse StormMonolith GLB:", error);
+          console.warn("Failed to parse storyboard GLB:", error);
         }
       );
     } catch (err) {
-      console.warn("Error loading StormMonolith:", err);
+      console.warn("Error loading storyboard assets:", err);
     }
 
     contextRef.current = {
@@ -92,13 +144,17 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
       scene,
       threeCamera,
       monolithGroup,
+      yeroGroup,
+      polaroidGroup,
+      demolitionGroup,
+      crystalGroup,
       pointLight,
       ambientLight,
     };
 
     return () => {
-      if (monolithGroup) {
-        (monolithGroup as THREE.Group).traverse((child: any) => {
+      [monolithGroup, yeroGroup, polaroidGroup, demolitionGroup, crystalGroup].forEach((grp) => {
+        grp.traverse((child: any) => {
           if (child.isMesh) {
             child.geometry?.dispose();
             if (Array.isArray(child.material)) {
@@ -108,8 +164,8 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
             }
           }
         });
-        scene.remove(monolithGroup);
-      }
+        scene.remove(grp);
+      });
       renderer.dispose();
       contextRef.current = null;
     };
@@ -120,7 +176,18 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
     const ctx = contextRef.current;
     if (!ctx) return;
 
-    const { renderer, scene, threeCamera, monolithGroup, pointLight, ambientLight } = ctx;
+    const {
+      renderer,
+      scene,
+      threeCamera,
+      monolithGroup,
+      yeroGroup,
+      polaroidGroup,
+      demolitionGroup,
+      crystalGroup,
+      pointLight,
+      ambientLight,
+    } = ctx;
 
     // Follow camera orientation with smooth parallax scaling
     threeCamera.position.x = camera.x * 0.12;
@@ -129,23 +196,49 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
     threeCamera.rotation.x = (-camera.rx * Math.PI) / 180 * 0.7;
     threeCamera.rotation.z = (-camera.rz * Math.PI) / 180 * 0.7;
 
-    if (monolithGroup) {
-      // Gentle majestic gyroscopic rotation
+    // 1. Monolith: Gyroscopic rotation and floating drift
+    if (monolithGroup.children.length > 0) {
       monolithGroup.rotation.y = frame * 0.01;
       monolithGroup.rotation.x = Math.sin(frame * 0.007) * 0.12;
-      monolithGroup.rotation.z = Math.cos(frame * 0.008) * 0.08;
-
-      // Parallax floating drift in the right atmospheric quadrant
-      monolithGroup.position.x = 460 + Math.sin(frame * 0.005) * 40;
-      monolithGroup.position.y = 120 + Math.cos(frame * 0.006) * 30;
-      monolithGroup.position.z = -950 + Math.sin(frame * 0.01) * 30;
+      monolithGroup.position.x = 480 + Math.sin(frame * 0.005) * 40;
+      monolithGroup.position.y = 140 + Math.cos(frame * 0.006) * 30;
 
       // Pulse emissive core when lightning strikes
       monolithGroup.traverse((child: any) => {
-        if (child.isMesh && child.material) {
-          if (child.material.emissive) {
-            child.material.emissiveIntensity = isLightningActive ? 3.8 : 1.2;
-          }
+        if (child.isMesh && child.material && child.material.emissive) {
+          child.material.emissiveIntensity = isLightningActive ? 3.8 : 1.2;
+        }
+      });
+    }
+
+    // 2. Tumbling Yero: Horizontal wind drift across lower horizon
+    if (yeroGroup.children.length > 0) {
+      const windOffset = ((frame * 3.5) % 1800) - 900;
+      yeroGroup.position.x = windOffset;
+      yeroGroup.rotation.z = Math.sin(frame * 0.03) * 0.25;
+      yeroGroup.rotation.x = frame * 0.02;
+    }
+
+    // 3. Memory Polaroid: Gentle breathing drift on left flank
+    if (polaroidGroup.children.length > 0) {
+      polaroidGroup.position.y = 80 + Math.sin(frame * 0.012) * 15;
+      polaroidGroup.rotation.z = -0.22 + Math.sin(frame * 0.008) * 0.06;
+    }
+
+    // 4. Demolition Concrete: Heavy rumble vibration on shockwaves
+    if (demolitionGroup.children.length > 0) {
+      const rumble = isLightningActive ? (Math.random() - 0.5) * 6 : 0;
+      demolitionGroup.position.y = -180 + rumble;
+      demolitionGroup.rotation.y = frame * 0.004;
+    }
+
+    // 5. Crystal Spike: Slow celestial spin with lightning reaction
+    if (crystalGroup.children.length > 0) {
+      crystalGroup.rotation.y = -frame * 0.015;
+      crystalGroup.rotation.z = Math.sin(frame * 0.01) * 0.15;
+      crystalGroup.traverse((child: any) => {
+        if (child.isMesh && child.material && child.material.emissive) {
+          child.material.emissiveIntensity = isLightningActive ? 5.0 : 1.5;
         }
       });
     }

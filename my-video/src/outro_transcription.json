@@ -1,0 +1,90 @@
+{
+  "outro_lines": [
+    {
+      "startSec": 251.3,
+      "endSec": 255.0,
+      "text": "Tatangayin ko bawat yero",
+      "words": [
+        {
+          "word": "Tatangayin",
+          "startSec": 251.3,
+          "endSec": 252.1
+        },
+        {
+          "word": "ko",
+          "startSec": 252.1,
+          "endSec": 252.3
+        },
+        {
+          "word": "bawat",
+          "startSec": 252.7,
+          "endSec": 253.1
+        },
+        {
+          "word": "yero",
+          "startSec": 253.1,
+          "endSec": 255.0
+        }
+      ]
+    },
+    {
+      "startSec": 257.5,
+      "endSec": 260.5,
+      "text": "Kahit na matunaw ako",
+      "words": [
+        {
+          "word": "Kahit",
+          "startSec": 257.5,
+          "endSec": 257.8
+        },
+        {
+          "word": "na",
+          "startSec": 257.8,
+          "endSec": 258.0
+        },
+        {
+          "word": "matunaw",
+          "startSec": 258.5,
+          "endSec": 259.0
+        },
+        {
+          "word": "ako",
+          "startSec": 259.0,
+          "endSec": 260.5
+        }
+      ]
+    },
+    {
+      "startSec": 262.4,
+      "endSec": 266.5,
+      "text": "Dahil ako, ako ang bagyo",
+      "words": [
+        {
+          "word": "Dahil",
+          "startSec": 262.4,
+          "endSec": 262.7
+        },
+        {
+          "word": "ako,",
+          "startSec": 262.7,
+          "endSec": 263.0
+        },
+        {
+          "word": "ako",
+          "startSec": 263.7,
+          "endSec": 264.0
+        },
+        {
+          "word": "ang",
+          "startSec": 264.0,
+          "endSec": 264.2
+        },
+        {
+          "word": "bagyo",
+          "startSec": 264.2,
+          "endSec": 266.5
+        }
+      ]
+    }
+  ]
+}

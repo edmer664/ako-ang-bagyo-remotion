@@ -1,0 +1,2163 @@
+{
+  "lines": [
+    {
+      "id": "v1-1",
+      "section": "verse1",
+      "startSec": 26.2,
+      "endSec": 31.5,
+      "text": "Pinaikutan mo 'ko, tinalikuran mo 'ko, sumunod mundo ko nahilo",
+      "translation": "You went around me, you turned your back on me, my world followed and got dizzy.",
+      "emphasisWords": [
+        "nahilo"
+      ],
+      "orientation": "diagonal-down",
+      "words": [
+        {
+          "word": "Pinaikutan",
+          "startSec": 26.2,
+          "endSec": 27.0
+        },
+        {
+          "word": "mo",
+          "startSec": 27.0,
+          "endSec": 27.15
+        },
+        {
+          "word": "'ko,",
+          "startSec": 27.15,
+          "endSec": 27.4
+        },
+        {
+          "word": "tinalikuran",
+          "startSec": 27.6,
+          "endSec": 28.3
+        },
+        {
+          "word": "mo",
+          "startSec": 28.3,
+          "endSec": 28.45
+        },
+        {
+          "word": "'ko,",
+          "startSec": 28.45,
+          "endSec": 28.7
+        },
+        {
+          "word": "sumunod",
+          "startSec": 29.2,
+          "endSec": 29.7
+        },
+        {
+          "word": "mundo",
+          "startSec": 29.7,
+          "endSec": 30.0
+        },
+        {
+          "word": "ko",
+          "startSec": 30.0,
+          "endSec": 30.15
+        },
+        {
+          "word": "nahilo",
+          "startSec": 30.4,
+          "endSec": 31.5
+        }
+      ]
+    },
+    {
+      "id": "v1-2",
+      "section": "verse1",
+      "startSec": 32.0,
+      "endSec": 35.8,
+      "text": "Hindi ko inakalang lalaki",
+      "translation": "I didn't expect it to grow.",
+      "emphasisWords": [
+        "lalaki"
+      ],
+      "orientation": "horizontal",
+      "words": [
+        {
+          "word": "Hindi",
+          "startSec": 32.0,
+          "endSec": 32.3
+        },
+        {
+          "word": "ko",
+          "startSec": 32.3,
+          "endSec": 32.45
+        },
+        {
+          "word": "inakalang",
+          "startSec": 32.9,
+          "endSec": 33.5
+        },
+        {
+          "word": "lalaki",
+          "startSec": 34.0,
+          "endSec": 35.8
+        }
+      ]
+    },
+    {
+      "id": "v1-3",
+      "section": "verse1",
+      "startSec": 37.9,
+      "endSec": 42.7,
+      "text": "Bumigat ang kalungkutan, mga luha 'di napigilan",
+      "translation": "Sadness grew heavy, tears couldn't be stopped.",
+      "emphasisWords": [
+        "kalungkutan",
+        "napigilan"
+      ],
+      "orientation": "split-flank",
+      "words": [
+        {
+          "word": "Bumigat",
+          "startSec": 37.9,
+          "endSec": 38.4
+        },
+        {
+          "word": "ang",
+          "startSec": 38.4,
+          "endSec": 38.55
+        },
+        {
+          "word": "kalungkutan,",
+          "startSec": 38.55,
+          "endSec": 39.7
+        },
+        {
+          "word": "mga",
+          "startSec": 40.0,
+          "endSec": 40.2
+        },
+        {
+          "word": "luha",
+          "startSec": 40.4,
+          "endSec": 40.7
+        },
+        {
+          "word": "'di",
+          "startSec": 40.9,
+          "endSec": 41.1
+        },
+        {
+          "word": "napigilan",
+          "startSec": 41.4,
+          "endSec": 42.7
+        }
+      ]
+    },
+    {
+      "id": "v1-4",
+      "section": "verse1",
+      "startSec": 43.3,
+      "endSec": 47.0,
+      "text": "Hanggang ngayon bumubuhos pa rin",
+      "translation": "Until now, it's still pouring.",
+      "emphasisWords": [
+        "bumubuhos"
+      ],
+      "orientation": "vertical-stack",
+      "words": [
+        {
+          "word": "Hanggang",
+          "startSec": 43.3,
+          "endSec": 43.7
+        },
+        {
+          "word": "ngayon",
+          "startSec": 43.7,
+          "endSec": 44.1
+        },
+        {
+          "word": "bumubuhos",
+          "startSec": 44.6,
+          "endSec": 45.4
+        },
+        {
+          "word": "pa",
+          "startSec": 45.4,
+          "endSec": 45.55
+        },
+        {
+          "word": "rin",
+          "startSec": 45.55,
+          "endSec": 47.0
+        }
+      ]
+    },
+    {
+      "id": "pc1-1",
+      "section": "prechorus",
+      "startSec": 51.0,
+      "endSec": 53.0,
+      "text": "Matakot na kayo",
+      "translation": "Be afraid now.",
+      "emphasisWords": [
+        "Matakot"
+      ],
+      "orientation": "monolith-center",
+      "words": [
+        {
+          "word": "Matakot",
+          "startSec": 51.0,
+          "endSec": 51.5
+        },
+        {
+          "word": "na",
+          "startSec": 51.5,
+          "endSec": 51.65
+        },
+        {
+          "word": "kayo",
+          "startSec": 51.65,
+          "endSec": 53.0
+        }
+      ]
+    },
+    {
+      "id": "pc1-2",
+      "section": "prechorus",
+      "startSec": 55.4,
+      "endSec": 59.0,
+      "text": "Ako, ako ang bagyo",
+      "translation": "I, I am the storm.",
+      "emphasisWords": [
+        "ako",
+        "bagyo"
+      ],
+      "orientation": "cross-tilt",
+      "words": [
+        {
+          "word": "Ako,",
+          "startSec": 55.4,
+          "endSec": 56.0
+        },
+        {
+          "word": "ako",
+          "startSec": 56.7,
+          "endSec": 57.0
+        },
+        {
+          "word": "ang",
+          "startSec": 57.0,
+          "endSec": 57.15
+        },
+        {
+          "word": "bagyo",
+          "startSec": 57.15,
+          "endSec": 59.0
+        }
+      ]
+    },
+    {
+      "id": "c1-1",
+      "section": "chorus",
+      "startSec": 60.3,
+      "endSec": 65.0,
+      "text": "Kukunin na lang ang langit sa inyong dalawa",
+      "translation": "I'll just take the heaven from the two of you.",
+      "emphasisWords": [
+        "langit",
+        "dalawa"
+      ],
+      "orientation": "diagonal-up",
+      "words": [
+        {
+          "word": "Kukunin",
+          "startSec": 60.3,
+          "endSec": 60.8
+        },
+        {
+          "word": "na",
+          "startSec": 60.8,
+          "endSec": 60.95
+        },
+        {
+          "word": "lang",
+          "startSec": 60.95,
+          "endSec": 61.15
+        },
+        {
+          "word": "ang",
+          "startSec": 61.15,
+          "endSec": 61.3
+        },
+        {
+          "word": "langit",
+          "startSec": 61.6,
+          "endSec": 62.0
+        },
+        {
+          "word": "sa",
+          "startSec": 62.2,
+          "endSec": 62.35
+        },
+        {
+          "word": "inyong",
+          "startSec": 62.6,
+          "endSec": 63.0
+        },
+        {
+          "word": "dalawa",
+          "startSec": 63.2,
+          "endSec": 65.0
+        }
+      ]
+    },
+    {
+      "id": "c1-2",
+      "section": "chorus",
+      "startSec": 65.7,
+      "endSec": 70.8,
+      "text": "Bulong ko sa hangin sana 'di kayo masaya",
+      "translation": "I whisper to the wind, hoping you're not happy.",
+      "emphasisWords": [
+        "masaya"
+      ],
+      "orientation": "split-flank",
+      "words": [
+        {
+          "word": "Bulong",
+          "startSec": 65.7,
+          "endSec": 66.1
+        },
+        {
+          "word": "ko",
+          "startSec": 66.1,
+          "endSec": 66.25
+        },
+        {
+          "word": "sa",
+          "startSec": 66.4,
+          "endSec": 66.55
+        },
+        {
+          "word": "hangin",
+          "startSec": 66.8,
+          "endSec": 67.2
+        },
+        {
+          "word": "sana",
+          "startSec": 67.4,
+          "endSec": 67.7
+        },
+        {
+          "word": "'di",
+          "startSec": 67.9,
+          "endSec": 68.05
+        },
+        {
+          "word": "kayo",
+          "startSec": 68.2,
+          "endSec": 68.45
+        },
+        {
+          "word": "masaya",
+          "startSec": 68.7,
+          "endSec": 70.8
+        }
+      ]
+    },
+    {
+      "id": "c1-3",
+      "section": "chorus",
+      "startSec": 71.4,
+      "endSec": 76.5,
+      "text": "Sa dibdib ng bahay na 'tin tirahan n'yo",
+      "translation": "From the heart of the home you live in.",
+      "emphasisWords": [
+        "tirahan"
+      ],
+      "orientation": "horizontal",
+      "words": [
+        {
+          "word": "Sa",
+          "startSec": 71.4,
+          "endSec": 71.55
+        },
+        {
+          "word": "dibdib",
+          "startSec": 71.8,
+          "endSec": 72.2
+        },
+        {
+          "word": "ng",
+          "startSec": 72.2,
+          "endSec": 72.35
+        },
+        {
+          "word": "bahay",
+          "startSec": 72.6,
+          "endSec": 73.0
+        },
+        {
+          "word": "na",
+          "startSec": 73.0,
+          "endSec": 73.15
+        },
+        {
+          "word": "'tin",
+          "startSec": 73.15,
+          "endSec": 73.35
+        },
+        {
+          "word": "tirahan",
+          "startSec": 73.7,
+          "endSec": 74.2
+        },
+        {
+          "word": "n'yo",
+          "startSec": 74.2,
+          "endSec": 76.5
+        }
+      ]
+    },
+    {
+      "id": "c1-4",
+      "section": "chorus",
+      "startSec": 77.4,
+      "endSec": 81.0,
+      "text": "Tatangayin ko bawat yero",
+      "translation": "I'll carry away every sheet of iron (roofing).",
+      "emphasisWords": [
+        "yero"
+      ],
+      "orientation": "vertical-stack",
+      "words": [
+        {
+          "word": "Tatangayin",
+          "startSec": 77.4,
+          "endSec": 78.0
+        },
+        {
+          "word": "ko",
+          "startSec": 78.0,
+          "endSec": 78.15
+        },
+        {
+          "word": "bawat",
+          "startSec": 78.5,
+          "endSec": 78.8
+        },
+        {
+          "word": "yero",
+          "startSec": 79.0,
+          "endSec": 81.0
+        }
+      ]
+    },
+    {
+      "id": "c1-5",
+      "section": "chorus",
+      "startSec": 82.3,
+      "endSec": 86.0,
+      "text": "Dahil ako, ako ang bagyo",
+      "translation": "Because I, I am the storm.",
+      "emphasisWords": [
+        "ako",
+        "bagyo"
+      ],
+      "orientation": "cross-tilt",
+      "words": [
+        {
+          "word": "Dahil",
+          "startSec": 82.3,
+          "endSec": 82.6
+        },
+        {
+          "word": "ako,",
+          "startSec": 82.6,
+          "endSec": 83.0
+        },
+        {
+          "word": "ako",
+          "startSec": 84.0,
+          "endSec": 84.3
+        },
+        {
+          "word": "ang",
+          "startSec": 84.3,
+          "endSec": 84.45
+        },
+        {
+          "word": "bagyo",
+          "startSec": 84.45,
+          "endSec": 86.0
+        }
+      ]
+    },
+    {
+      "id": "v2-1",
+      "section": "verse2",
+      "startSec": 132.0,
+      "endSec": 134.4,
+      "text": "Itinago na litrato",
+      "translation": "The photo was hidden.",
+      "emphasisWords": [
+        "litrato"
+      ],
+      "orientation": "horizontal",
+      "words": [
+        {
+          "word": "Itinago",
+          "startSec": 132.0,
+          "endSec": 132.5
+        },
+        {
+          "word": "na",
+          "startSec": 132.5,
+          "endSec": 132.65
+        },
+        {
+          "word": "litrato",
+          "startSec": 132.9,
+          "endSec": 134.4
+        }
+      ]
+    },
+    {
+      "id": "v2-2",
+      "section": "verse2",
+      "startSec": 135.0,
+      "endSec": 137.2,
+      "text": "Kunwari 'di ko nakita",
+      "translation": "As if I didn't see it.",
+      "emphasisWords": [
+        "nakita"
+      ],
+      "orientation": "diagonal-down",
+      "words": [
+        {
+          "word": "Kunwari",
+          "startSec": 135.0,
+          "endSec": 135.4
+        },
+        {
+          "word": "'di",
+          "startSec": 135.6,
+          "endSec": 135.75
+        },
+        {
+          "word": "ko",
+          "startSec": 135.75,
+          "endSec": 135.9
+        },
+        {
+          "word": "nakita",
+          "startSec": 136.2,
+          "endSec": 137.2
+        }
+      ]
+    },
+    {
+      "id": "v2-3",
+      "section": "verse2",
+      "startSec": 137.8,
+      "endSec": 142.5,
+      "text": "Takot ka sigurong masalanta ko s'ya",
+      "translation": "You're probably afraid I'll devastate her.",
+      "emphasisWords": [
+        "masalanta"
+      ],
+      "orientation": "split-flank",
+      "words": [
+        {
+          "word": "Takot",
+          "startSec": 137.8,
+          "endSec": 138.2
+        },
+        {
+          "word": "ka",
+          "startSec": 138.2,
+          "endSec": 138.35
+        },
+        {
+          "word": "sigurong",
+          "startSec": 138.6,
+          "endSec": 139.0
+        },
+        {
+          "word": "masalanta",
+          "startSec": 139.4,
+          "endSec": 140.0
+        },
+        {
+          "word": "ko",
+          "startSec": 140.0,
+          "endSec": 140.15
+        },
+        {
+          "word": "s'ya",
+          "startSec": 140.15,
+          "endSec": 142.5
+        }
+      ]
+    },
+    {
+      "id": "v2-4",
+      "section": "verse2",
+      "startSec": 143.4,
+      "endSec": 148.6,
+      "text": "Tingin mo ba 'di ko kayang listong-gusto mo na gusto kita",
+      "translation": "Do you think I can't handle how much you want me?",
+      "emphasisWords": [
+        "listong-gusto",
+        "gusto"
+      ],
+      "orientation": "monolith-center",
+      "words": [
+        {
+          "word": "Tingin",
+          "startSec": 143.4,
+          "endSec": 143.7
+        },
+        {
+          "word": "mo",
+          "startSec": 143.7,
+          "endSec": 143.85
+        },
+        {
+          "word": "ba",
+          "startSec": 143.85,
+          "endSec": 144.0
+        },
+        {
+          "word": "'di",
+          "startSec": 144.2,
+          "endSec": 144.35
+        },
+        {
+          "word": "ko",
+          "startSec": 144.35,
+          "endSec": 144.5
+        },
+        {
+          "word": "kayang",
+          "startSec": 144.8,
+          "endSec": 145.1
+        },
+        {
+          "word": "listong-gusto",
+          "startSec": 145.6,
+          "endSec": 146.4
+        },
+        {
+          "word": "mo",
+          "startSec": 146.4,
+          "endSec": 146.55
+        },
+        {
+          "word": "na",
+          "startSec": 146.55,
+          "endSec": 146.7
+        },
+        {
+          "word": "gusto",
+          "startSec": 147.0,
+          "endSec": 147.3
+        },
+        {
+          "word": "kita",
+          "startSec": 147.3,
+          "endSec": 148.6
+        }
+      ]
+    },
+    {
+      "id": "v2-5",
+      "section": "verse2",
+      "startSec": 148.9,
+      "endSec": 153.3,
+      "text": "Dinalali mo sa pag-asa",
+      "translation": "You led me on with hope.",
+      "emphasisWords": [
+        "pag-asa"
+      ],
+      "orientation": "vertical-stack",
+      "words": [
+        {
+          "word": "Dinalali",
+          "startSec": 148.9,
+          "endSec": 149.4
+        },
+        {
+          "word": "mo",
+          "startSec": 149.4,
+          "endSec": 149.55
+        },
+        {
+          "word": "sa",
+          "startSec": 149.7,
+          "endSec": 149.85
+        },
+        {
+          "word": "pag-asa",
+          "startSec": 150.2,
+          "endSec": 153.3
+        }
+      ]
+    },
+    {
+      "id": "pc2-1",
+      "section": "prechorus2",
+      "startSec": 156.0,
+      "endSec": 158.0,
+      "text": "Matakot na kayo",
+      "translation": "Be afraid now.",
+      "emphasisWords": [
+        "Matakot"
+      ],
+      "orientation": "monolith-center",
+      "words": [
+        {
+          "word": "Matakot",
+          "startSec": 156.0,
+          "endSec": 156.5
+        },
+        {
+          "word": "na",
+          "startSec": 156.5,
+          "endSec": 156.65
+        },
+        {
+          "word": "kayo",
+          "startSec": 156.65,
+          "endSec": 158.0
+        }
+      ]
+    },
+    {
+      "id": "pc2-2",
+      "section": "prechorus2",
+      "startSec": 201.3,
+      "endSec": 204.5,
+      "text": "Ako, ako, ako ang bagyo",
+      "translation": "I, I, I am the storm.",
+      "emphasisWords": [
+        "ako",
+        "bagyo"
+      ],
+      "orientation": "cross-tilt",
+      "words": [
+        {
+          "word": "Ako,",
+          "startSec": 201.3,
+          "endSec": 201.7
+        },
+        {
+          "word": "ako,",
+          "startSec": 202.0,
+          "endSec": 202.3
+        },
+        {
+          "word": "ako",
+          "startSec": 202.6,
+          "endSec": 202.8
+        },
+        {
+          "word": "ang",
+          "startSec": 202.8,
+          "endSec": 202.95
+        },
+        {
+          "word": "bagyo",
+          "startSec": 202.95,
+          "endSec": 204.5
+        }
+      ]
+    },
+    {
+      "id": "c2-1",
+      "section": "chorus2",
+      "startSec": 205.9,
+      "endSec": 210.7,
+      "text": "Kukunin na lang ang langit sa inyong dalawa",
+      "translation": "I'll just take the heaven from the two of you.",
+      "emphasisWords": [
+        "langit",
+        "dalawa"
+      ],
+      "orientation": "diagonal-up",
+      "words": [
+        {
+          "word": "Kukunin",
+          "startSec": 205.9,
+          "endSec": 206.4
+        },
+        {
+          "word": "na",
+          "startSec": 206.4,
+          "endSec": 206.55
+        },
+        {
+          "word": "lang",
+          "startSec": 206.55,
+          "endSec": 206.75
+        },
+        {
+          "word": "ang",
+          "startSec": 206.75,
+          "endSec": 206.9
+        },
+        {
+          "word": "langit",
+          "startSec": 207.2,
+          "endSec": 207.6
+        },
+        {
+          "word": "sa",
+          "startSec": 207.8,
+          "endSec": 207.95
+        },
+        {
+          "word": "inyong",
+          "startSec": 208.2,
+          "endSec": 208.6
+        },
+        {
+          "word": "dalawa",
+          "startSec": 208.8,
+          "endSec": 210.7
+        }
+      ]
+    },
+    {
+      "id": "c2-2",
+      "section": "chorus2",
+      "startSec": 211.2,
+      "endSec": 216.0,
+      "text": "Bulong ko sa hangin sana 'di kayo masaya",
+      "translation": "I whisper to the wind, hoping you're not happy.",
+      "emphasisWords": [
+        "masaya"
+      ],
+      "orientation": "split-flank",
+      "words": [
+        {
+          "word": "Bulong",
+          "startSec": 211.2,
+          "endSec": 211.6
+        },
+        {
+          "word": "ko",
+          "startSec": 211.6,
+          "endSec": 211.75
+        },
+        {
+          "word": "sa",
+          "startSec": 211.9,
+          "endSec": 212.05
+        },
+        {
+          "word": "hangin",
+          "startSec": 212.3,
+          "endSec": 212.7
+        },
+        {
+          "word": "sana",
+          "startSec": 212.9,
+          "endSec": 213.2
+        },
+        {
+          "word": "'di",
+          "startSec": 213.4,
+          "endSec": 213.55
+        },
+        {
+          "word": "kayo",
+          "startSec": 213.7,
+          "endSec": 213.95
+        },
+        {
+          "word": "masaya",
+          "startSec": 214.2,
+          "endSec": 216.0
+        }
+      ]
+    },
+    {
+      "id": "c2-3",
+      "section": "chorus2",
+      "startSec": 217.0,
+      "endSec": 222.0,
+      "text": "Sa dibdib ng bahay na 'tin tirahan n'yo",
+      "translation": "From the heart of the home you live in.",
+      "emphasisWords": [
+        "tirahan"
+      ],
+      "orientation": "horizontal",
+      "words": [
+        {
+          "word": "Sa",
+          "startSec": 217.0,
+          "endSec": 217.15
+        },
+        {
+          "word": "dibdib",
+          "startSec": 217.4,
+          "endSec": 217.8
+        },
+        {
+          "word": "ng",
+          "startSec": 217.8,
+          "endSec": 217.95
+        },
+        {
+          "word": "bahay",
+          "startSec": 218.2,
+          "endSec": 218.6
+        },
+        {
+          "word": "na",
+          "startSec": 218.6,
+          "endSec": 218.75
+        },
+        {
+          "word": "'tin",
+          "startSec": 218.75,
+          "endSec": 218.95
+        },
+        {
+          "word": "tirahan",
+          "startSec": 219.3,
+          "endSec": 219.8
+        },
+        {
+          "word": "n'yo",
+          "startSec": 219.8,
+          "endSec": 222.0
+        }
+      ]
+    },
+    {
+      "id": "c2-4",
+      "section": "chorus2",
+      "startSec": 222.8,
+      "endSec": 227.0,
+      "text": "Tatangayin ko bawat yero",
+      "translation": "I'll carry away every sheet of iron (roofing).",
+      "emphasisWords": [
+        "yero"
+      ],
+      "orientation": "vertical-stack",
+      "words": [
+        {
+          "word": "Tatangayin",
+          "startSec": 222.8,
+          "endSec": 223.4
+        },
+        {
+          "word": "ko",
+          "startSec": 223.4,
+          "endSec": 223.55
+        },
+        {
+          "word": "bawat",
+          "startSec": 223.9,
+          "endSec": 224.2
+        },
+        {
+          "word": "yero",
+          "startSec": 224.4,
+          "endSec": 227.0
+        }
+      ]
+    },
+    {
+      "id": "b-1",
+      "section": "bridge",
+      "startSec": 228.5,
+      "endSec": 233.8,
+      "text": "Dilim ng pag-ibig, buong kawalan mo'y 'di ko na isusuko",
+      "translation": "Darkness of love, your complete absence I will no longer surrender.",
+      "emphasisWords": [
+        "isusuko"
+      ],
+      "orientation": "diagonal-down",
+      "words": [
+        {
+          "word": "Dilim",
+          "startSec": 228.5,
+          "endSec": 228.8
+        },
+        {
+          "word": "ng",
+          "startSec": 228.8,
+          "endSec": 228.95
+        },
+        {
+          "word": "pag-ibig,",
+          "startSec": 229.2,
+          "endSec": 229.7
+        },
+        {
+          "word": "buong",
+          "startSec": 230.0,
+          "endSec": 230.3
+        },
+        {
+          "word": "kawalan",
+          "startSec": 230.6,
+          "endSec": 231.0
+        },
+        {
+          "word": "mo'y",
+          "startSec": 231.0,
+          "endSec": 231.15
+        },
+        {
+          "word": "'di",
+          "startSec": 231.3,
+          "endSec": 231.45
+        },
+        {
+          "word": "ko",
+          "startSec": 231.45,
+          "endSec": 231.6
+        },
+        {
+          "word": "na",
+          "startSec": 231.6,
+          "endSec": 231.75
+        },
+        {
+          "word": "isusuko",
+          "startSec": 232.0,
+          "endSec": 233.8
+        }
+      ]
+    },
+    {
+      "id": "b-2",
+      "section": "bridge",
+      "startSec": 234.5,
+      "endSec": 239.0,
+      "text": "Tulong ng pag-ibig sa sama ng panahon",
+      "translation": "Help of love in bad times.",
+      "emphasisWords": [
+        "pag-ibig",
+        "panahon"
+      ],
+      "orientation": "horizontal",
+      "words": [
+        {
+          "word": "Tulong",
+          "startSec": 234.5,
+          "endSec": 234.8
+        },
+        {
+          "word": "ng",
+          "startSec": 234.8,
+          "endSec": 234.95
+        },
+        {
+          "word": "pag-ibig",
+          "startSec": 235.2,
+          "endSec": 235.7
+        },
+        {
+          "word": "sa",
+          "startSec": 235.9,
+          "endSec": 236.05
+        },
+        {
+          "word": "sama",
+          "startSec": 236.3,
+          "endSec": 236.6
+        },
+        {
+          "word": "ng",
+          "startSec": 236.6,
+          "endSec": 236.75
+        },
+        {
+          "word": "panahon",
+          "startSec": 237.0,
+          "endSec": 239.0
+        }
+      ]
+    },
+    {
+      "id": "b-3",
+      "section": "bridge",
+      "startSec": 240.0,
+      "endSec": 245.0,
+      "text": "Sa dibdib ng bahay na 'tin tirahan n'yo",
+      "translation": "From the heart of the home you live in.",
+      "emphasisWords": [
+        "tirahan"
+      ],
+      "orientation": "split-flank",
+      "words": [
+        {
+          "word": "Sa",
+          "startSec": 240.0,
+          "endSec": 240.15
+        },
+        {
+          "word": "dibdib",
+          "startSec": 240.4,
+          "endSec": 240.8
+        },
+        {
+          "word": "ng",
+          "startSec": 240.8,
+          "endSec": 240.95
+        },
+        {
+          "word": "bahay",
+          "startSec": 241.2,
+          "endSec": 241.6
+        },
+        {
+          "word": "na",
+          "startSec": 241.6,
+          "endSec": 241.75
+        },
+        {
+          "word": "'tin",
+          "startSec": 241.75,
+          "endSec": 241.95
+        },
+        {
+          "word": "tirahan",
+          "startSec": 242.3,
+          "endSec": 242.8
+        },
+        {
+          "word": "n'yo",
+          "startSec": 242.8,
+          "endSec": 245.0
+        }
+      ]
+    },
+    {
+      "id": "b-4",
+      "section": "bridge",
+      "startSec": 245.8,
+      "endSec": 249.8,
+      "text": "Gigibain ko mga pader n'yo",
+      "translation": "I will tear down your walls.",
+      "emphasisWords": [
+        "Gigibain",
+        "pader"
+      ],
+      "orientation": "vertical-stack",
+      "words": [
+        {
+          "word": "Gigibain",
+          "startSec": 245.8,
+          "endSec": 246.4
+        },
+        {
+          "word": "ko",
+          "startSec": 246.4,
+          "endSec": 246.55
+        },
+        {
+          "word": "mga",
+          "startSec": 246.8,
+          "endSec": 247.0
+        },
+        {
+          "word": "pader",
+          "startSec": 247.3,
+          "endSec": 247.7
+        },
+        {
+          "word": "n'yo",
+          "startSec": 247.7,
+          "endSec": 249.8
+        }
+      ]
+    },
+    {
+      "id": "b-5",
+      "section": "bridge",
+      "startSec": 250.5,
+      "endSec": 254.5,
+      "text": "Dahil ako, ako ang bagyo",
+      "translation": "Because I, I am the storm.",
+      "emphasisWords": [
+        "ako",
+        "bagyo"
+      ],
+      "orientation": "cross-tilt",
+      "words": [
+        {
+          "word": "Dahil",
+          "startSec": 250.5,
+          "endSec": 250.8
+        },
+        {
+          "word": "ako,",
+          "startSec": 250.8,
+          "endSec": 251.2
+        },
+        {
+          "word": "ako",
+          "startSec": 252.3,
+          "endSec": 252.6
+        },
+        {
+          "word": "ang",
+          "startSec": 252.6,
+          "endSec": 252.75
+        },
+        {
+          "word": "bagyo",
+          "startSec": 252.75,
+          "endSec": 254.5
+        }
+      ]
+    },
+    {
+      "id": "b-6",
+      "section": "bridge",
+      "startSec": 305.8,
+      "endSec": 310.9,
+      "text": "Lahat ng hahawakan ko, lagi sa 'kin na lumalayo",
+      "translation": "Everything I touch, always moves away from me.",
+      "emphasisWords": [
+        "lumalayo"
+      ],
+      "orientation": "diagonal-down",
+      "words": [
+        {
+          "word": "Lahat",
+          "startSec": 305.8,
+          "endSec": 306.1
+        },
+        {
+          "word": "ng",
+          "startSec": 306.1,
+          "endSec": 306.25
+        },
+        {
+          "word": "hahawakan",
+          "startSec": 306.5,
+          "endSec": 307.0
+        },
+        {
+          "word": "ko,",
+          "startSec": 307.0,
+          "endSec": 307.2
+        },
+        {
+          "word": "lagi",
+          "startSec": 307.5,
+          "endSec": 307.8
+        },
+        {
+          "word": "sa",
+          "startSec": 307.8,
+          "endSec": 307.95
+        },
+        {
+          "word": "'kin",
+          "startSec": 307.95,
+          "endSec": 308.15
+        },
+        {
+          "word": "na",
+          "startSec": 308.15,
+          "endSec": 308.3
+        },
+        {
+          "word": "lumalayo",
+          "startSec": 308.6,
+          "endSec": 310.9
+        }
+      ]
+    },
+    {
+      "id": "b-7",
+      "section": "bridge",
+      "startSec": 311.1,
+      "endSec": 316.5,
+      "text": "Lahat ng tao na nariyan, sa pinalapit ay nasasaktan",
+      "translation": "All the people there, those I draw near get hurt.",
+      "emphasisWords": [
+        "nasasaktan"
+      ],
+      "orientation": "split-flank",
+      "words": [
+        {
+          "word": "Lahat",
+          "startSec": 311.1,
+          "endSec": 311.4
+        },
+        {
+          "word": "ng",
+          "startSec": 311.4,
+          "endSec": 311.55
+        },
+        {
+          "word": "tao",
+          "startSec": 311.8,
+          "endSec": 312.1
+        },
+        {
+          "word": "na",
+          "startSec": 312.1,
+          "endSec": 312.25
+        },
+        {
+          "word": "nariyan,",
+          "startSec": 312.5,
+          "endSec": 313.0
+        },
+        {
+          "word": "sa",
+          "startSec": 313.3,
+          "endSec": 313.45
+        },
+        {
+          "word": "pinalapit",
+          "startSec": 313.7,
+          "endSec": 314.2
+        },
+        {
+          "word": "ay",
+          "startSec": 314.2,
+          "endSec": 314.35
+        },
+        {
+          "word": "nasasaktan",
+          "startSec": 314.6,
+          "endSec": 316.5
+        }
+      ]
+    },
+    {
+      "id": "b-8",
+      "section": "bridge",
+      "startSec": 317.0,
+      "endSec": 322.7,
+      "text": "Pag nagsawa na sila sa 'kin, pag wala na sa 'kin na nakatingin",
+      "translation": "When they get tired of me, when no one looks at me anymore.",
+      "emphasisWords": [
+        "nagsawa",
+        "nakatingin"
+      ],
+      "orientation": "horizontal",
+      "words": [
+        {
+          "word": "Pag",
+          "startSec": 317.0,
+          "endSec": 317.15
+        },
+        {
+          "word": "nagsawa",
+          "startSec": 317.4,
+          "endSec": 317.8
+        },
+        {
+          "word": "na",
+          "startSec": 317.8,
+          "endSec": 317.95
+        },
+        {
+          "word": "sila",
+          "startSec": 318.1,
+          "endSec": 318.35
+        },
+        {
+          "word": "sa",
+          "startSec": 318.35,
+          "endSec": 318.5
+        },
+        {
+          "word": "'kin,",
+          "startSec": 318.5,
+          "endSec": 318.7
+        },
+        {
+          "word": "pag",
+          "startSec": 319.0,
+          "endSec": 319.15
+        },
+        {
+          "word": "wala",
+          "startSec": 319.4,
+          "endSec": 319.6
+        },
+        {
+          "word": "na",
+          "startSec": 319.6,
+          "endSec": 319.75
+        },
+        {
+          "word": "sa",
+          "startSec": 319.75,
+          "endSec": 319.9
+        },
+        {
+          "word": "'kin",
+          "startSec": 319.9,
+          "endSec": 320.1
+        },
+        {
+          "word": "na",
+          "startSec": 320.1,
+          "endSec": 320.25
+        },
+        {
+          "word": "nakatingin",
+          "startSec": 320.5,
+          "endSec": 322.7
+        }
+      ]
+    },
+    {
+      "id": "b-9",
+      "section": "bridge",
+      "startSec": 323.0,
+      "endSec": 328.0,
+      "text": "Pag 'di na 'ko nakakatuwa, ako 'yung lagi na naiiwan mag-isa",
+      "translation": "When I'm no longer amusing, I'm the one always left alone.",
+      "emphasisWords": [
+        "mag-isa"
+      ],
+      "orientation": "monolith-center",
+      "words": [
+        {
+          "word": "Pag",
+          "startSec": 323.0,
+          "endSec": 323.15
+        },
+        {
+          "word": "'di",
+          "startSec": 323.3,
+          "endSec": 323.45
+        },
+        {
+          "word": "na",
+          "startSec": 323.45,
+          "endSec": 323.6
+        },
+        {
+          "word": "'ko",
+          "startSec": 323.6,
+          "endSec": 323.75
+        },
+        {
+          "word": "nakakatuwa,",
+          "startSec": 324.0,
+          "endSec": 324.6
+        },
+        {
+          "word": "ako",
+          "startSec": 324.9,
+          "endSec": 325.1
+        },
+        {
+          "word": "'yung",
+          "startSec": 325.1,
+          "endSec": 325.25
+        },
+        {
+          "word": "lagi",
+          "startSec": 325.5,
+          "endSec": 325.7
+        },
+        {
+          "word": "na",
+          "startSec": 325.7,
+          "endSec": 325.85
+        },
+        {
+          "word": "naiiwan",
+          "startSec": 326.1,
+          "endSec": 326.6
+        },
+        {
+          "word": "mag-isa",
+          "startSec": 326.8,
+          "endSec": 328.0
+        }
+      ]
+    },
+    {
+      "id": "b-10",
+      "section": "bridge",
+      "startSec": 328.5,
+      "endSec": 333.7,
+      "text": "Kahit pa nasubukan ko lahat, 'di ko kakayanin 'di pa rin naman ito sapat",
+      "translation": "Even if I tried everything, I can't handle it, it's still not enough.",
+      "emphasisWords": [
+        "lahat",
+        "sapat"
+      ],
+      "orientation": "vertical-stack",
+      "words": [
+        {
+          "word": "Kahit",
+          "startSec": 328.5,
+          "endSec": 328.7
+        },
+        {
+          "word": "pa",
+          "startSec": 328.7,
+          "endSec": 328.85
+        },
+        {
+          "word": "nasubukan",
+          "startSec": 329.1,
+          "endSec": 329.6
+        },
+        {
+          "word": "ko",
+          "startSec": 329.6,
+          "endSec": 329.75
+        },
+        {
+          "word": "lahat,",
+          "startSec": 329.75,
+          "endSec": 330.0
+        },
+        {
+          "word": "'di",
+          "startSec": 330.3,
+          "endSec": 330.45
+        },
+        {
+          "word": "ko",
+          "startSec": 330.45,
+          "endSec": 330.6
+        },
+        {
+          "word": "kakayanin",
+          "startSec": 330.9,
+          "endSec": 331.4
+        },
+        {
+          "word": "'di",
+          "startSec": 331.4,
+          "endSec": 331.55
+        },
+        {
+          "word": "pa",
+          "startSec": 331.55,
+          "endSec": 331.7
+        },
+        {
+          "word": "rin",
+          "startSec": 331.7,
+          "endSec": 331.85
+        },
+        {
+          "word": "naman",
+          "startSec": 332.0,
+          "endSec": 332.25
+        },
+        {
+          "word": "ito",
+          "startSec": 332.25,
+          "endSec": 332.45
+        },
+        {
+          "word": "sapat",
+          "startSec": 332.7,
+          "endSec": 333.7
+        }
+      ]
+    },
+    {
+      "id": "b-11",
+      "section": "bridge",
+      "startSec": 334.0,
+      "endSec": 336.9,
+      "text": "Kung iisipin 'to, ang lalaki ko, puro lang sugat",
+      "translation": "If I think about it, my man is just wounds.",
+      "emphasisWords": [
+        "sugat"
+      ],
+      "orientation": "diagonal-up",
+      "words": [
+        {
+          "word": "Kung",
+          "startSec": 334.0,
+          "endSec": 334.15
+        },
+        {
+          "word": "iisipin",
+          "startSec": 334.4,
+          "endSec": 334.8
+        },
+        {
+          "word": "'to,",
+          "startSec": 334.8,
+          "endSec": 335.0
+        },
+        {
+          "word": "ang",
+          "startSec": 335.2,
+          "endSec": 335.35
+        },
+        {
+          "word": "lalaki",
+          "startSec": 335.6,
+          "endSec": 336.0
+        },
+        {
+          "word": "ko,",
+          "startSec": 336.0,
+          "endSec": 336.2
+        },
+        {
+          "word": "puro",
+          "startSec": 336.4,
+          "endSec": 336.6
+        },
+        {
+          "word": "lang",
+          "startSec": 336.6,
+          "endSec": 336.75
+        },
+        {
+          "word": "sugat",
+          "startSec": 336.75,
+          "endSec": 336.9
+        }
+      ]
+    },
+    {
+      "id": "b-12",
+      "section": "bridge",
+      "startSec": 337.3,
+      "endSec": 339.3,
+      "text": "Sumasama 'tong nila",
+      "translation": "This is getting worse for them.",
+      "emphasisWords": [
+        "Sumasama"
+      ],
+      "orientation": "cross-tilt",
+      "words": [
+        {
+          "word": "Sumasama",
+          "startSec": 337.3,
+          "endSec": 337.9
+        },
+        {
+          "word": "'tong",
+          "startSec": 337.9,
+          "endSec": 338.1
+        },
+        {
+          "word": "nila",
+          "startSec": 338.1,
+          "endSec": 339.3
+        }
+      ]
+    },
+    {
+      "id": "b-13",
+      "section": "bridge",
+      "startSec": 339.9,
+      "endSec": 342.0,
+      "text": "Ang tagal ko nang binibitbit ang bigat",
+      "translation": "I've been carrying this weight for so long.",
+      "emphasisWords": [
+        "bigat"
+      ],
+      "orientation": "horizontal",
+      "words": [
+        {
+          "word": "Ang",
+          "startSec": 339.9,
+          "endSec": 340.05
+        },
+        {
+          "word": "tagal",
+          "startSec": 340.05,
+          "endSec": 340.35
+        },
+        {
+          "word": "ko",
+          "startSec": 340.35,
+          "endSec": 340.5
+        },
+        {
+          "word": "nang",
+          "startSec": 340.5,
+          "endSec": 340.65
+        },
+        {
+          "word": "binibitbit",
+          "startSec": 340.9,
+          "endSec": 341.5
+        },
+        {
+          "word": "ang",
+          "startSec": 341.5,
+          "endSec": 341.65
+        },
+        {
+          "word": "bigat",
+          "startSec": 341.65,
+          "endSec": 342.0
+        }
+      ]
+    },
+    {
+      "id": "b-14",
+      "section": "bridge",
+      "startSec": 342.3,
+      "endSec": 344.9,
+      "text": "Dito ko rin ibibigay 'tong galaw mo lang ay kilala",
+      "translation": "Here I will also give this movement of yours that is only known.",
+      "emphasisWords": [
+        "kilala"
+      ],
+      "orientation": "split-flank",
+      "words": [
+        {
+          "word": "Dito",
+          "startSec": 342.3,
+          "endSec": 342.5
+        },
+        {
+          "word": "ko",
+          "startSec": 342.5,
+          "endSec": 342.65
+        },
+        {
+          "word": "rin",
+          "startSec": 342.65,
+          "endSec": 342.8
+        },
+        {
+          "word": "ibibigay",
+          "startSec": 343.1,
+          "endSec": 343.6
+        },
+        {
+          "word": "'tong",
+          "startSec": 343.6,
+          "endSec": 343.75
+        },
+        {
+          "word": "galaw",
+          "startSec": 343.9,
+          "endSec": 344.2
+        },
+        {
+          "word": "mo",
+          "startSec": 344.2,
+          "endSec": 344.35
+        },
+        {
+          "word": "lang",
+          "startSec": 344.35,
+          "endSec": 344.5
+        },
+        {
+          "word": "ay",
+          "startSec": 344.5,
+          "endSec": 344.65
+        },
+        {
+          "word": "kilala",
+          "startSec": 344.65,
+          "endSec": 344.9
+        }
+      ]
+    },
+    {
+      "id": "b-15",
+      "section": "bridge",
+      "startSec": 345.3,
+      "endSec": 347.9,
+      "text": "Nang sa tingin ko 'di ko naman gusto na saktan",
+      "translation": "Because in my opinion, I don't want to hurt.",
+      "emphasisWords": [
+        "saktan"
+      ],
+      "orientation": "diagonal-down",
+      "words": [
+        {
+          "word": "Nang",
+          "startSec": 345.3,
+          "endSec": 345.45
+        },
+        {
+          "word": "sa",
+          "startSec": 345.45,
+          "endSec": 345.6
+        },
+        {
+          "word": "tingin",
+          "startSec": 345.8,
+          "endSec": 346.1
+        },
+        {
+          "word": "ko",
+          "startSec": 346.1,
+          "endSec": 346.25
+        },
+        {
+          "word": "'di",
+          "startSec": 346.25,
+          "endSec": 346.4
+        },
+        {
+          "word": "ko",
+          "startSec": 346.4,
+          "endSec": 346.55
+        },
+        {
+          "word": "naman",
+          "startSec": 346.7,
+          "endSec": 346.9
+        },
+        {
+          "word": "gusto",
+          "startSec": 347.1,
+          "endSec": 347.4
+        },
+        {
+          "word": "na",
+          "startSec": 347.4,
+          "endSec": 347.55
+        },
+        {
+          "word": "saktan",
+          "startSec": 347.55,
+          "endSec": 347.9
+        }
+      ]
+    },
+    {
+      "id": "b-16",
+      "section": "bridge",
+      "startSec": 348.0,
+      "endSec": 350.0,
+      "text": "Kaya mag-ingat ka",
+      "translation": "So be careful.",
+      "emphasisWords": [
+        "mag-ingat"
+      ],
+      "orientation": "monolith-center",
+      "words": [
+        {
+          "word": "Kaya",
+          "startSec": 348.0,
+          "endSec": 348.2
+        },
+        {
+          "word": "mag-ingat",
+          "startSec": 348.5,
+          "endSec": 349.0
+        },
+        {
+          "word": "ka",
+          "startSec": 349.0,
+          "endSec": 350.0
+        }
+      ]
+    },
+    {
+      "id": "o-1",
+      "section": "outro",
+      "startSec": 350.8,
+      "endSec": 353.0,
+      "text": "Ako ang bagyo",
+      "translation": "I am the storm.",
+      "emphasisWords": [
+        "bagyo"
+      ],
+      "orientation": "cross-tilt",
+      "words": [
+        {
+          "word": "Ako",
+          "startSec": 350.8,
+          "endSec": 351.0
+        },
+        {
+          "word": "ang",
+          "startSec": 351.0,
+          "endSec": 351.15
+        },
+        {
+          "word": "bagyo",
+          "startSec": 351.15,
+          "endSec": 353.0
+        }
+      ]
+    },
+    {
+      "id": "o-2",
+      "section": "outro",
+      "startSec": 354.5,
+      "endSec": 358.8,
+      "text": "Kukunin na lang ang langit sa inyong dalawa",
+      "translation": "I'll just take the heaven from the two of you.",
+      "emphasisWords": [
+        "langit",
+        "dalawa"
+      ],
+      "orientation": "diagonal-up",
+      "words": [
+        {
+          "word": "Kukunin",
+          "startSec": 354.5,
+          "endSec": 355.0
+        },
+        {
+          "word": "na",
+          "startSec": 355.0,
+          "endSec": 355.15
+        },
+        {
+          "word": "lang",
+          "startSec": 355.15,
+          "endSec": 355.35
+        },
+        {
+          "word": "ang",
+          "startSec": 355.35,
+          "endSec": 355.5
+        },
+        {
+          "word": "langit",
+          "startSec": 355.8,
+          "endSec": 356.2
+        },
+        {
+          "word": "sa",
+          "startSec": 356.4,
+          "endSec": 356.55
+        },
+        {
+          "word": "inyong",
+          "startSec": 356.8,
+          "endSec": 357.2
+        },
+        {
+          "word": "dalawa",
+          "startSec": 357.4,
+          "endSec": 358.8
+        }
+      ]
+    },
+    {
+      "id": "o-3",
+      "section": "outro",
+      "startSec": 359.9,
+      "endSec": 404.7,
+      "text": "Bulong ko sa hangin sana 'di kayo masaya",
+      "translation": "I whisper to the wind, hoping you're not happy.",
+      "emphasisWords": [
+        "masaya"
+      ],
+      "orientation": "split-flank",
+      "words": [
+        {
+          "word": "Bulong",
+          "startSec": 359.9,
+          "endSec": 400.3
+        },
+        {
+          "word": "ko",
+          "startSec": 400.3,
+          "endSec": 400.45
+        },
+        {
+          "word": "sa",
+          "startSec": 400.6,
+          "endSec": 400.75
+        },
+        {
+          "word": "hangin",
+          "startSec": 401.0,
+          "endSec": 401.4
+        },
+        {
+          "word": "sana",
+          "startSec": 401.6,
+          "endSec": 401.9
+        },
+        {
+          "word": "'di",
+          "startSec": 402.1,
+          "endSec": 402.25
+        },
+        {
+          "word": "kayo",
+          "startSec": 402.4,
+          "endSec": 402.65
+        },
+        {
+          "word": "masaya",
+          "startSec": 402.9,
+          "endSec": 404.7
+        }
+      ]
+    },
+    {
+      "id": "o-4",
+      "section": "outro",
+      "startSec": 405.7,
+      "endSec": 410.5,
+      "text": "Sa dibdib ng bahay na 'tin tirahan n'yo",
+      "translation": "From the heart of the home you live in.",
+      "emphasisWords": [
+        "tirahan"
+      ],
+      "orientation": "horizontal",
+      "words": [
+        {
+          "word": "Sa",
+          "startSec": 405.7,
+          "endSec": 405.85
+        },
+        {
+          "word": "dibdib",
+          "startSec": 406.1,
+          "endSec": 406.5
+        },
+        {
+          "word": "ng",
+          "startSec": 406.5,
+          "endSec": 406.65
+        },
+        {
+          "word": "bahay",
+          "startSec": 406.9,
+          "endSec": 407.3
+        },
+        {
+          "word": "na",
+          "startSec": 407.3,
+          "endSec": 407.45
+        },
+        {
+          "word": "'tin",
+          "startSec": 407.45,
+          "endSec": 407.65
+        },
+        {
+          "word": "tirahan",
+          "startSec": 408.0,
+          "endSec": 408.5
+        },
+        {
+          "word": "n'yo",
+          "startSec": 408.5,
+          "endSec": 410.5
+        }
+      ]
+    },
+    {
+      "id": "o-5",
+      "section": "outro",
+      "startSec": 411.5,
+      "endSec": 415.0,
+      "text": "Tatangayin ko bawat yero",
+      "translation": "I'll carry away every sheet of iron (roofing).",
+      "emphasisWords": [
+        "yero"
+      ],
+      "orientation": "vertical-stack",
+      "words": [
+        {
+          "word": "Tatangayin",
+          "startSec": 411.5,
+          "endSec": 412.1
+        },
+        {
+          "word": "ko",
+          "startSec": 412.1,
+          "endSec": 412.25
+        },
+        {
+          "word": "bawat",
+          "startSec": 412.6,
+          "endSec": 412.9
+        },
+        {
+          "word": "yero",
+          "startSec": 413.1,
+          "endSec": 415.0
+        }
+      ]
+    },
+    {
+      "id": "o-6",
+      "section": "outro",
+      "startSec": 417.6,
+      "endSec": 421.0,
+      "text": "Kahit na matunaw ako",
+      "translation": "Even if I melt away.",
+      "emphasisWords": [
+        "matunaw"
+      ],
+      "orientation": "monolith-center",
+      "words": [
+        {
+          "word": "Kahit",
+          "startSec": 417.6,
+          "endSec": 417.8
+        },
+        {
+          "word": "na",
+          "startSec": 417.8,
+          "endSec": 417.95
+        },
+        {
+          "word": "matunaw",
+          "startSec": 418.3,
+          "endSec": 418.8
+        },
+        {
+          "word": "ako",
+          "startSec": 418.8,
+          "endSec": 421.0
+        }
+      ]
+    },
+    {
+      "id": "o-7",
+      "section": "outro",
+      "startSec": 422.5,
+      "endSec": 426.0,
+      "text": "Dahil ako, ako ang bagyo",
+      "translation": "Because I, I am the storm.",
+      "emphasisWords": [
+        "ako",
+        "bagyo"
+      ],
+      "orientation": "cross-tilt",
+      "words": [
+        {
+          "word": "Dahil",
+          "startSec": 422.5,
+          "endSec": 422.8
+        },
+        {
+          "word": "ako,",
+          "startSec": 422.8,
+          "endSec": 423.2
+        },
+        {
+          "word": "ako",
+          "startSec": 424.0,
+          "endSec": 424.3
+        },
+        {
+          "word": "ang",
+          "startSec": 424.3,
+          "endSec": 424.45
+        },
+        {
+          "word": "bagyo",
+          "startSec": 424.45,
+          "endSec": 426.0
+        }
+      ]
+    }
+  ]
+}
