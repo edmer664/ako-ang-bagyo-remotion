@@ -91,7 +91,7 @@ export const SpatialWorld: React.FC<SpatialWorldProps> = ({
                 marginTop: -540,
                 transformStyle: "preserve-3d",
                 transform: `
-                  translate3d(${pos.x}px, ${pos.y}px, ${pos.z}px)
+                  translate3d(${pos.x}px, ${pos.y}px, ${pos.z + (isCurrent ? 40 : 0)}px)
                   rotateY(${pos.ry}deg)
                   rotateX(${pos.rx}deg)
                   rotateZ(${pos.rz}deg)
@@ -102,6 +102,7 @@ export const SpatialWorld: React.FC<SpatialWorldProps> = ({
                 alignItems: "center",
                 justifyContent: "center",
                 pointerEvents: "none",
+                zIndex: isCurrent ? 50 : 1,
               }}
             >
               <KineticAnimator
