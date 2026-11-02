@@ -11,6 +11,9 @@ on:
         description: 'Frame range (leave empty for full video, or e.g. 0-300 for quick test)'
         required: false
         default: ''
+  push:
+    branches:
+      - main
 
 jobs:
   render:
@@ -50,7 +53,9 @@ jobs:
           if [ -n "${{ github.event.inputs.frames }}" ]; then
             FRAME_FLAG="--frames=${{ github.event.inputs.frames }}"
           fi
-          npx remotion render src/index.ts "${{ github.event.inputs.composition }}" out/ako-ang-bagyo.mp4 --concurrency=100% --gl=angle $FRAME_FLAG
+          COMP="${{ github.event.inputs.composition }}"
+          COMP="${COMP:-AkoAngBagyo}"
+          npx remotion render src/index.ts "$COMP" out/ako-ang-bagyo.mp4 --concurrency=100% --gl=angle $FRAME_FLAG
 
       - name: Upload Video Artifact
         uses: actions/upload-artifact@v4
