@@ -5,8 +5,8 @@
     "words": [
       {
         "word": "SHEAN",
-        "startSec": 0.0,
-        "endSec": 14.0,
+        "startSec": 0,
+        "endSec": 14,
         "isEmphasis": false
       }
     ]
@@ -17,19 +17,19 @@
     "words": [
       {
         "word": "AKO",
-        "startSec": 14.0,
+        "startSec": 14,
         "endSec": 26.34,
         "isEmphasis": false
       },
       {
         "word": "ANG",
-        "startSec": 14.0,
+        "startSec": 14,
         "endSec": 26.34,
         "isEmphasis": false
       },
       {
         "word": "BAGYO",
-        "startSec": 14.0,
+        "startSec": 14,
         "endSec": 26.34,
         "isEmphasis": false
       }
@@ -324,7 +324,7 @@
       {
         "word": "hangin",
         "startSec": 66.4,
-        "endSec": 67.0,
+        "endSec": 67,
         "isEmphasis": true
       }
     ]
@@ -348,12 +348,12 @@
       {
         "word": "ng",
         "startSec": 71.85,
-        "endSec": 72.0,
+        "endSec": 72,
         "isEmphasis": false
       },
       {
         "word": "bahay",
-        "startSec": 72.0,
+        "startSec": 72,
         "endSec": 72.4,
         "isEmphasis": true
       },
@@ -527,7 +527,7 @@
       },
       {
         "word": "masalanta",
-        "startSec": 99.0,
+        "startSec": 99,
         "endSec": 99.55,
         "isEmphasis": false
       },
@@ -629,7 +629,7 @@
     "words": [
       {
         "word": "Tinatali",
-        "startSec": 109.0,
+        "startSec": 109,
         "endSec": 109.55,
         "isEmphasis": false
       },
@@ -648,7 +648,7 @@
       {
         "word": "sa",
         "startSec": 109.85,
-        "endSec": 110.0,
+        "endSec": 110,
         "isEmphasis": false
       },
       {
@@ -666,12 +666,12 @@
       {
         "word": "Matakot",
         "startSec": 116.4,
-        "endSec": 117.0,
+        "endSec": 117,
         "isEmphasis": true
       },
       {
         "word": "na",
-        "startSec": 117.0,
+        "startSec": 117,
         "endSec": 117.15,
         "isEmphasis": false
       },
@@ -725,7 +725,7 @@
     "words": [
       {
         "word": "Kulimlim",
-        "startSec": 126.0,
+        "startSec": 126,
         "endSec": 126.6,
         "isEmphasis": true
       },
@@ -1158,12 +1158,12 @@
       {
         "word": "na",
         "startSec": 188.85,
-        "endSec": 189.0,
+        "endSec": 189,
         "isEmphasis": false
       },
       {
         "word": "lumalayo",
-        "startSec": 189.0,
+        "startSec": 189,
         "endSec": 189.75,
         "isEmphasis": false
       }
@@ -1247,7 +1247,7 @@
     "words": [
       {
         "word": "At",
-        "startSec": 197.0,
+        "startSec": 197,
         "endSec": 197.15,
         "isEmphasis": false
       },
@@ -1326,12 +1326,12 @@
       {
         "word": "na",
         "startSec": 200.9,
-        "endSec": 201.0,
+        "endSec": 201,
         "isEmphasis": false
       },
       {
         "word": "nakatingin",
-        "startSec": 201.0,
+        "startSec": 201,
         "endSec": 201.75,
         "isEmphasis": false
       }
@@ -1375,17 +1375,17 @@
   },
   {
     "id": "b-8",
-    "orientation": "vertical-stack",
+    "orientation": "monolith-center",
     "words": [
       {
         "word": "Ako",
         "startSec": 205.64,
-        "endSec": 206.0,
+        "endSec": 206,
         "isEmphasis": false
       },
       {
         "word": "'yung",
-        "startSec": 206.0,
+        "startSec": 206,
         "endSec": 206.25,
         "isEmphasis": false
       },
@@ -1404,14 +1404,14 @@
       {
         "word": "mag-isa",
         "startSec": 207.3,
-        "endSec": 208.0,
+        "endSec": 208,
         "isEmphasis": true
       }
     ]
   },
   {
     "id": "b-9",
-    "orientation": "diagonal-up",
+    "orientation": "horizontal",
     "words": [
       {
         "word": "Kahit",
@@ -1446,12 +1446,12 @@
       {
         "word": "ang",
         "startSec": 209.8,
-        "endSec": 210.0,
+        "endSec": 210,
         "isEmphasis": false
       },
       {
         "word": "lahat",
-        "startSec": 210.0,
+        "startSec": 210,
         "endSec": 210.6,
         "isEmphasis": true
       }
@@ -1513,7 +1513,7 @@
   },
   {
     "id": "b-11",
-    "orientation": "diagonal-down",
+    "orientation": "split-flank",
     "words": [
       {
         "word": "Kung",
@@ -1566,14 +1566,14 @@
       {
         "word": "sugat",
         "startSec": 216.45,
-        "endSec": 217.0,
+        "endSec": 217,
         "isEmphasis": true
       }
     ]
   },
   {
     "id": "b-12",
-    "orientation": "vertical-stack",
+    "orientation": "monolith-center",
     "words": [
       {
         "word": "Matatamo",
@@ -1645,7 +1645,7 @@
   },
   {
     "id": "b-14",
-    "orientation": "cross-tilt",
+    "orientation": "monolith-center",
     "words": [
       {
         "word": "Konting",
@@ -1705,11 +1705,11 @@
   },
   {
     "id": "b-15",
-    "orientation": "split-flank",
+    "orientation": "horizontal",
     "words": [
       {
         "word": "'Di",
-        "startSec": 225.0,
+        "startSec": 225,
         "endSec": 225.3,
         "isEmphasis": false
       },
@@ -1757,7 +1757,7 @@
     "words": [
       {
         "word": "Kaya",
-        "startSec": 228.0,
+        "startSec": 228,
         "endSec": 228.4,
         "isEmphasis": false
       },
@@ -1801,7 +1801,7 @@
   },
   {
     "id": "o-2",
-    "orientation": "diagonal-down",
+    "orientation": "horizontal",
     "words": [
       {
         "word": "Kulimlim",
@@ -1843,11 +1843,11 @@
   },
   {
     "id": "o-3",
-    "orientation": "split-flank",
+    "orientation": "horizontal",
     "words": [
       {
         "word": "Bulong",
-        "startSec": 240.0,
+        "startSec": 240,
         "endSec": 240.5,
         "isEmphasis": true
       },
@@ -1872,12 +1872,12 @@
       {
         "word": "\"sana",
         "startSec": 241.5,
-        "endSec": 242.0,
+        "endSec": 242,
         "isEmphasis": false
       },
       {
         "word": "'di",
-        "startSec": 242.0,
+        "startSec": 242,
         "endSec": 242.2,
         "isEmphasis": true
       },
@@ -1890,14 +1890,14 @@
       {
         "word": "masaya\"",
         "startSec": 242.5,
-        "endSec": 245.0,
+        "endSec": 245,
         "isEmphasis": true
       }
     ]
   },
   {
     "id": "o-4",
-    "orientation": "diagonal-up",
+    "orientation": "horizontal",
     "words": [
       {
         "word": "Sa",
@@ -1932,20 +1932,20 @@
       {
         "word": "titirhan",
         "startSec": 247.3,
-        "endSec": 248.0,
+        "endSec": 248,
         "isEmphasis": false
       },
       {
         "word": "n'yo",
-        "startSec": 248.0,
-        "endSec": 251.0,
+        "startSec": 248,
+        "endSec": 251,
         "isEmphasis": true
       }
     ]
   },
   {
     "id": "o-5",
-    "orientation": "vertical-stack",
+    "orientation": "monolith-center",
     "words": [
       {
         "word": "Tatangayin",
@@ -1980,12 +1980,12 @@
       {
         "word": "Kahit",
         "startSec": 257.5,
-        "endSec": 258.0,
+        "endSec": 258,
         "isEmphasis": false
       },
       {
         "word": "na",
-        "startSec": 258.0,
+        "startSec": 258,
         "endSec": 258.4,
         "isEmphasis": false
       },
@@ -2005,7 +2005,7 @@
   },
   {
     "id": "o-7",
-    "orientation": "cross-tilt",
+    "orientation": "monolith-center",
     "words": [
       {
         "word": "Dahil",

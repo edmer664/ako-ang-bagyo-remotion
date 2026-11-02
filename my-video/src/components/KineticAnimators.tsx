@@ -48,15 +48,15 @@ export const KineticAnimator: React.FC<KineticProps> = ({
 
   const currentSec = line.startSec + localFrame / fps;
 
-  // Global exit fade when nearing the end of the line
+  // Global exit fade when nearing the end of the line (keeps subtle persistence across gaps)
   const exitProgress = interpolate(
     localFrame,
-    [lineDuration - 8, lineDuration],
+    [lineDuration - 4, lineDuration + 8],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const containerOpacity = 1 - exitProgress;
-  const containerScale = interpolate(exitProgress, [0, 1], [1, 0.96]);
+  const containerOpacity = interpolate(exitProgress, [0, 1], [1, 0.4]);
+  const containerScale = interpolate(exitProgress, [0, 1], [1, 0.98]);
 
   // Clean translation subtitle renderer
   const renderTranslation = (delay = 4) => {
@@ -123,13 +123,13 @@ export const KineticAnimator: React.FC<KineticProps> = ({
     const wordScale = interpolate(wordSpring, [0, 1], [0.82, 1]);
     const activeScale = isWordActive ? 1.08 : 1.0;
 
-    // Opacity: subtle ghost before singing (0.2), popping to full 1.0 on sing
+    // Opacity: clearly legible (0.55) before singing, popping to full 1.0 on sing
     const wordOpacity = isWordSung
-      ? interpolate(wordLocalF, [0, 3], [0.3, 1], {
+      ? interpolate(wordLocalF, [0, 3], [0.65, 1], {
           extrapolateLeft: "clamp",
           extrapolateRight: "clamp",
         })
-      : 0.2;
+      : 0.55;
 
     const emp =
       w.isEmphasis ||
@@ -145,7 +145,7 @@ export const KineticAnimator: React.FC<KineticProps> = ({
       ? accentColor
       : isWordPast
       ? "#ffffff"
-      : "rgba(255, 255, 255, 0.4)";
+      : "rgba(255, 255, 255, 0.7)";
 
     const wordBg = emp
       ? isWordActive

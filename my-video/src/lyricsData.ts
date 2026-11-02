@@ -517,8 +517,8 @@ export const LYRICS: LyricLine[] = [
     translation: "I'm always the one left alone",
     section: "bridge",
     emphasisWords: ["NAIIWANG MAG-ISA"],
-    animStyle: "mask-wipe",
-    camera: { x: 0, y: 250, z: -20400, rx: 15, ry: 0, rz: 0 },
+    animStyle: "hazard-monolith",
+    camera: { x: 0, y: 0, z: -20400, rx: 0, ry: 0, rz: 0 },
     shakeIntensity: 0.5,
   },
   {
@@ -530,7 +530,7 @@ export const LYRICS: LyricLine[] = [
     section: "bridge",
     emphasisWords: ["LAHAT"],
     animStyle: "char-stagger",
-    camera: { x: 420, y: -180, z: -21000, rx: -10, ry: 18, rz: 6 },
+    camera: { x: 0, y: 0, z: -21000, rx: 0, ry: 0, rz: 0 },
   },
   {
     id: "b-10",
@@ -541,7 +541,7 @@ export const LYRICS: LyricLine[] = [
     section: "bridge",
     emphasisWords: ["'DI PA RIN SAPAT"],
     animStyle: "mask-wipe",
-    camera: { x: -380, y: 160, z: -21600, rx: 12, ry: -14, rz: -5 },
+    camera: { x: 0, y: 0, z: -21600, rx: 0, ry: 0, rz: 0 },
   },
   {
     id: "b-11",
@@ -552,7 +552,7 @@ export const LYRICS: LyricLine[] = [
     section: "bridge",
     emphasisWords: ["PURO LANG SUGAT"],
     animStyle: "hazard-monolith",
-    camera: { x: 350, y: 200, z: -22200, rx: -14, ry: 20, rz: 7 },
+    camera: { x: 0, y: 0, z: -22200, rx: 0, ry: 0, rz: 0 },
     shakeIntensity: 0.5,
   },
   {
@@ -564,7 +564,7 @@ export const LYRICS: LyricLine[] = [
     section: "bridge",
     emphasisWords: ["MATATAMO NILA"],
     animStyle: "blur-focus",
-    camera: { x: -260, y: -120, z: -22600, rx: 8, ry: -12, rz: -4 },
+    camera: { x: 0, y: 0, z: -22600, rx: 0, ry: 0, rz: 0 },
   },
   {
     id: "b-13",
@@ -575,7 +575,7 @@ export const LYRICS: LyricLine[] = [
     section: "bridge",
     emphasisWords: ["BINITBIT", "BIGAT"],
     animStyle: "char-stagger",
-    camera: { x: -400, y: -200, z: -22900, rx: 14, ry: -18, rz: -6 },
+    camera: { x: 0, y: 0, z: -22900, rx: 0, ry: 0, rz: 0 },
   },
   {
     id: "b-14",
@@ -599,7 +599,7 @@ export const LYRICS: LyricLine[] = [
     section: "bridge",
     emphasisWords: ["'DI GUSTO", "SAKTAN"],
     animStyle: "blur-focus",
-    camera: { x: -280, y: 120, z: -24000, rx: 6, ry: -10, rz: -3 },
+    camera: { x: 0, y: 0, z: -24000, rx: 0, ry: 0, rz: 0 },
   },
   {
     id: "b-16",
@@ -610,7 +610,7 @@ export const LYRICS: LyricLine[] = [
     section: "bridge",
     emphasisWords: ["MAG-INGAT KA"],
     animStyle: "hazard-monolith",
-    camera: { x: 0, y: -100, z: -24500, rx: -10, ry: 0, rz: 0 },
+    camera: { x: 0, y: 0, z: -24500, rx: 0, ry: 0, rz: 0 },
     shakeIntensity: 0.8,
   },
   {
@@ -635,7 +635,7 @@ export const LYRICS: LyricLine[] = [
     section: "outro",
     emphasisWords: ["KULIMLIM", "LANGIT"],
     animStyle: "char-stagger",
-    camera: { x: -450, y: 220, z: -25400, rx: -12, ry: -20, rz: -6 },
+    camera: { x: 0, y: 0, z: -25400, rx: 0, ry: 0, rz: 0 },
   },
   {
     id: "o-3",
@@ -646,7 +646,7 @@ export const LYRICS: LyricLine[] = [
     section: "outro",
     emphasisWords: ["BULONG", "'DI KAYO MASAYA"],
     animStyle: "blur-focus",
-    camera: { x: 420, y: -180, z: -26000, rx: 10, ry: 18, rz: 5 },
+    camera: { x: 0, y: 0, z: -26000, rx: 0, ry: 0, rz: 0 },
   },
   {
     id: "o-4",
@@ -657,7 +657,7 @@ export const LYRICS: LyricLine[] = [
     section: "outro",
     emphasisWords: ["TIBAY", "BAHAY"],
     animStyle: "mask-wipe",
-    camera: { x: -380, y: 200, z: -26600, rx: -10, ry: -15, rz: -4 },
+    camera: { x: 0, y: 0, z: -26600, rx: 0, ry: 0, rz: 0 },
   },
   {
     id: "o-5",
@@ -668,7 +668,7 @@ export const LYRICS: LyricLine[] = [
     section: "outro",
     emphasisWords: ["TATANGAYIN", "BAWAT YERO"],
     animStyle: "rooftop-tear",
-    camera: { x: 450, y: -240, z: -27200, rx: 18, ry: 25, rz: 8 },
+    camera: { x: 0, y: 0, z: -27200, rx: 0, ry: 0, rz: 0 },
     shakeIntensity: 1.0,
     hasLightning: true,
   },
@@ -681,7 +681,7 @@ export const LYRICS: LyricLine[] = [
     section: "outro",
     emphasisWords: ["MATUNAW AKO"],
     animStyle: "blur-focus",
-    camera: { x: -250, y: -150, z: -27600, rx: 10, ry: -15, rz: -4 },
+    camera: { x: 0, y: 0, z: -27600, rx: 0, ry: 0, rz: 0 },
   },
   {
     id: "o-7",
@@ -692,7 +692,7 @@ export const LYRICS: LyricLine[] = [
     section: "outro",
     emphasisWords: ["AKO", "BAGYO"],
     animStyle: "lightning-shatter",
-    camera: { x: 0, y: -300, z: -28100, rx: 15, ry: 0, rz: 0 },
+    camera: { x: 0, y: 0, z: -28100, rx: 0, ry: 0, rz: 0 },
     shakeIntensity: 1.4,
     hasLightning: true,
   },
@@ -813,14 +813,14 @@ export const getCameraForFrame = (frame: number, fps: number): SpatialCoord => {
     const peak = Math.sin(pTrans * Math.PI);
 
     if (nextLine.section === "chorus" || nextLine.section === "chorus2") {
-      transitionImpulseRy = peak * (activeIndex % 2 === 0 ? 30 : -30);
-      transitionImpulseRz = peak * 14;
+      transitionImpulseRy = peak * (activeIndex % 2 === 0 ? 4 : -4);
+      transitionImpulseRz = peak * 2;
     } else if (nextLine.section === "outro") {
-      transitionImpulseRx = -peak * 35;
+      transitionImpulseRx = -peak * 4;
     } else if (nextLine.section === "prechorus") {
-      transitionImpulseRz = peak * 12;
+      transitionImpulseRz = peak * 2;
     } else if (nextLine.section === "bridge") {
-      transitionImpulseRx = peak * 18;
+      transitionImpulseRx = peak * 3;
     }
   }
 

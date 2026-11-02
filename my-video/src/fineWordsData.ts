@@ -447,7 +447,7 @@ export const FINE_WORD_DATA: Record<string, LineWordData> = {
   },
   "b-8": {
     id: "b-8",
-    orientation: "vertical-stack",
+    orientation: "monolith-center",
     words: [
       { word: "Ako", startSec: 205.64, endSec: 206.00, isEmphasis: false },
       { word: "'yung", startSec: 206.00, endSec: 206.25, isEmphasis: false },
@@ -458,7 +458,7 @@ export const FINE_WORD_DATA: Record<string, LineWordData> = {
   },
   "b-9": {
     id: "b-9",
-    orientation: "diagonal-up",
+    orientation: "horizontal",
     words: [
       { word: "Kahit", startSec: 208.20, endSec: 208.55, isEmphasis: false },
       { word: "pa", startSec: 208.55, endSec: 208.75, isEmphasis: false },
@@ -485,7 +485,7 @@ export const FINE_WORD_DATA: Record<string, LineWordData> = {
   },
   "b-11": {
     id: "b-11",
-    orientation: "diagonal-down",
+    orientation: "split-flank",
     words: [
       { word: "Kung", startSec: 213.80, endSec: 214.05, isEmphasis: false },
       { word: "iisipin", startSec: 214.05, endSec: 214.65, isEmphasis: false },
@@ -500,7 +500,7 @@ export const FINE_WORD_DATA: Record<string, LineWordData> = {
   },
   "b-12": {
     id: "b-12",
-    orientation: "vertical-stack",
+    orientation: "monolith-center",
     words: [
       { word: "Matatamo", startSec: 217.20, endSec: 218.40, isEmphasis: true },
       { word: "nila", startSec: 218.40, endSec: 219.40, isEmphasis: true },
@@ -522,7 +522,7 @@ export const FINE_WORD_DATA: Record<string, LineWordData> = {
   },
   "b-14": {
     id: "b-14",
-    orientation: "cross-tilt",
+    orientation: "monolith-center",
     words: [
       { word: "Konting", startSec: 222.30, endSec: 222.70, isEmphasis: false },
       { word: "galaw", startSec: 222.70, endSec: 223.10, isEmphasis: false },
@@ -537,7 +537,7 @@ export const FINE_WORD_DATA: Record<string, LineWordData> = {
   },
   "b-15": {
     id: "b-15",
-    orientation: "split-flank",
+    orientation: "horizontal",
     words: [
       { word: "'Di", startSec: 225.00, endSec: 225.30, isEmphasis: false },
       { word: "ko", startSec: 225.30, endSec: 225.50, isEmphasis: false },
@@ -568,7 +568,7 @@ export const FINE_WORD_DATA: Record<string, LineWordData> = {
   },
   "o-2": {
     id: "o-2",
-    orientation: "diagonal-down",
+    orientation: "horizontal",
     words: [
       { word: "Kulimlim", startSec: 234.40, endSec: 235.10, isEmphasis: true },
       { word: "ng", startSec: 235.10, endSec: 235.30, isEmphasis: false },
@@ -580,7 +580,7 @@ export const FINE_WORD_DATA: Record<string, LineWordData> = {
   },
   "o-3": {
     id: "o-3",
-    orientation: "split-flank",
+    orientation: "horizontal",
     words: [
       { word: "Bulong", startSec: 240.00, endSec: 240.50, isEmphasis: true },
       { word: "ko", startSec: 240.50, endSec: 240.70, isEmphasis: false },
@@ -594,7 +594,7 @@ export const FINE_WORD_DATA: Record<string, LineWordData> = {
   },
   "o-4": {
     id: "o-4",
-    orientation: "diagonal-up",
+    orientation: "horizontal",
     words: [
       { word: "Sa", startSec: 245.60, endSec: 245.80, isEmphasis: false },
       { word: "tibay", startSec: 245.80, endSec: 246.30, isEmphasis: true },
@@ -607,7 +607,7 @@ export const FINE_WORD_DATA: Record<string, LineWordData> = {
   },
   "o-5": {
     id: "o-5",
-    orientation: "vertical-stack",
+    orientation: "monolith-center",
     words: [
       { word: "Tatangayin", startSec: 251.30, endSec: 252.30, isEmphasis: true },
       { word: "ko", startSec: 252.30, endSec: 252.60, isEmphasis: false },
@@ -627,7 +627,7 @@ export const FINE_WORD_DATA: Record<string, LineWordData> = {
   },
   "o-7": {
     id: "o-7",
-    orientation: "cross-tilt",
+    orientation: "monolith-center",
     words: [
       { word: "Dahil", startSec: 262.40, endSec: 262.80, isEmphasis: false },
       { word: "ako,", startSec: 262.80, endSec: 263.30, isEmphasis: true },
