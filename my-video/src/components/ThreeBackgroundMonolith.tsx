@@ -1,5 +1,12 @@
-import React, { useLayoutEffect, useRef } from "react";
-import { Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
+import {
+  continueRender,
+  delayRender,
+  Easing,
+  interpolate,
+  useCurrentFrame,
+  useVideoConfig,
+} from "remotion";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { STORM_MONOLITH_BASE64 } from "../assets/stormMonolithBase64";
@@ -20,6 +27,20 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
   const { width, height } = useVideoConfig();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
+  // Remotion render barrier to guarantee GLTF meshes are parsed and added to scene before capture
+  const [handle] = useState(() =>
+    delayRender("ThreeBackgroundMonolith_GLTF_Parse")
+  );
+  const [isLoaded, setIsLoaded] = useState(false);
+  const hasContinuedRef = useRef(false);
+
+  const safeContinueRender = useCallback(() => {
+    if (!hasContinuedRef.current) {
+      hasContinuedRef.current = true;
+      continueRender(handle);
+    }
+  }, [handle]);
+
   const contextRef = useRef<{
     renderer: THREE.WebGLRenderer;
     scene: THREE.Scene;
@@ -39,7 +60,7 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
     coreAccentLight: THREE.PointLight;
   } | null>(null);
 
-  // Initialize WebGL Scene
+  // Initialize WebGL Scene & Load GLTF Model
   useLayoutEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -55,6 +76,7 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
       renderer.setSize(width, height);
       renderer.setPixelRatio(1);
     } catch {
+      safeContinueRender();
       return;
     }
 
@@ -63,7 +85,7 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
     // Atmospheric depth fog - seamlessly merges distant geometry with storm horizon
     scene.fog = new THREE.FogExp2(0x060c18, 0.0012);
 
-    const threeCamera = new THREE.PerspectiveCamera(55, width / height, 10, 5000);
+    const threeCamera = new THREE.PerspectiveCamera(68, width / height, 10, 5000);
     threeCamera.rotation.order = "YXZ";
     threeCamera.position.set(0, 0, 500);
 
@@ -84,15 +106,17 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
     scene.add(pointLight);
 
     // Dedicated local accent point light attached right in front of the unfolding citadel
+    // Positioned at X = 745 to match the Triad corridor clearance anchor
     const coreAccentLight = new THREE.PointLight(0x00f0ff, 4.2, 1200);
-    coreAccentLight.position.set(460, 120, -100);
+    coreAccentLight.position.set(745, 120, -100);
     scene.add(coreAccentLight);
 
     // =========================================================================
     // UNIFIED UNFOLDING ARTIFACT CITADEL HIERARCHY
+    // Anchor shifted to X = +745px, Y = +110px, Z = -200px (Triad Fix Strategy)
     // =========================================================================
     const artifactCitadel = new THREE.Group();
-    artifactCitadel.position.set(460, 110, -200);
+    artifactCitadel.position.set(745, 110, -200);
     artifactCitadel.rotation.y = -0.35; // angled toward camera to show deep 3D facets
     scene.add(artifactCitadel);
 
@@ -136,12 +160,12 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
           let shardIdx = 0;
           let yeroIdx = 0;
 
-          rawObjects.forEach((obj: any) => {
+          rawObjects.forEach((obj: THREE.Object3D) => {
             const name = obj.name || "";
 
             // Override and enhance materials: bright, colorful, vibrant specular highlights (NEVER dark/black)
-            obj.traverse((child: any) => {
-              if (child.isMesh) {
+            obj.traverse((child: THREE.Object3D) => {
+              if (child instanceof THREE.Mesh) {
                 const childName = (child.name || name || "").toLowerCase();
 
                 if (childName.includes("monolith")) {
@@ -232,8 +256,8 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
               const isLeft = yeroIdx % 2 === 0;
 
               if (isLeft) {
-                // Stepped tier along left wing flank
-                const stepX = -sheetIdxInWing * 1.1;
+                // Stepped tier along left wing flank (Triad Fix: clamped to -0.5 to clear Tier 1 corridor)
+                const stepX = -sheetIdxInWing * 0.5;
                 const stepY = sheetIdxInWing * 0.4;
                 const stepZ = -sheetIdxInWing * 0.15;
                 const tiltZ = 0.15 + sheetIdxInWing * 0.16;
@@ -241,7 +265,7 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
                 obj.rotation.set(0.1, 0, tiltZ);
                 yeroWingsLeft.add(obj);
               } else {
-                // Stepped tier along right wing flank (mirrored)
+                // Stepped tier along right wing flank (full dramatic theatrical deployment)
                 const stepX = sheetIdxInWing * 1.1;
                 const stepY = sheetIdxInWing * 0.4;
                 const stepZ = -sheetIdxInWing * 0.15;
@@ -312,13 +336,18 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
               coreAssembly.add(obj);
             }
           });
+
+          // All meshes added to scene: update state to trigger per-frame render
+          setIsLoaded(true);
         },
         (error) => {
           console.warn("Failed to parse storyboard GLB:", error);
+          safeContinueRender();
         }
       );
     } catch (err) {
       console.warn("Error loading storyboard assets:", err);
+      safeContinueRender();
     }
 
     contextRef.current = {
@@ -341,11 +370,12 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
     };
 
     return () => {
-      artifactCitadel.traverse((child: any) => {
-        if (child.isMesh) {
+      safeContinueRender();
+      artifactCitadel.traverse((child: THREE.Object3D) => {
+        if (child instanceof THREE.Mesh) {
           child.geometry?.dispose();
           if (Array.isArray(child.material)) {
-            child.material.forEach((m: any) => m.dispose());
+            child.material.forEach((m: THREE.Material) => m.dispose());
           } else {
             child.material?.dispose();
           }
@@ -355,7 +385,7 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
       renderer.dispose();
       contextRef.current = null;
     };
-  }, [width, height]);
+  }, [width, height, safeContinueRender]);
 
   // Per-frame unfolding animation & living simulation strictly matching storyboard sequence
   useLayoutEffect(() => {
@@ -381,12 +411,13 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
       coreAccentLight,
     } = ctx;
 
-    // Follow camera orientation with smooth parallax scaling
-    threeCamera.position.x = camera.x * 0.12;
-    threeCamera.position.y = -camera.y * 0.12;
-    threeCamera.rotation.y = (-camera.ry * Math.PI) / 180 * 0.7;
-    threeCamera.rotation.x = (-camera.rx * Math.PI) / 180 * 0.7;
-    threeCamera.rotation.z = (-camera.rz * Math.PI) / 180 * 0.7;
+    // Follow camera orientation with Triad Fix decoupling:
+    // gamma_ry dampened from 0.70 to 0.12, position.x scaled to 0.08
+    threeCamera.position.x = camera.x * 0.08;
+    threeCamera.position.y = -camera.y * 0.08;
+    threeCamera.rotation.y = ((-camera.ry * Math.PI) / 180) * 0.12;
+    threeCamera.rotation.x = ((-camera.rx * Math.PI) / 180) * 0.12;
+    threeCamera.rotation.z = ((-camera.rz * Math.PI) / 180) * 0.12;
 
     // =========================================================================
     // SEQUENTIAL LIFECYCLE PROGRESSION (UNFOLDS PROGRESSIVELY IN EXACT STAGES)
@@ -435,8 +466,8 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
     const citadelScale = 38 * (1.0 + crystalDeploy * 0.15);
     artifactCitadel.scale.set(citadelScale, citadelScale, citadelScale);
 
-    // Living floating hover drift in celestial upper-right sky
-    artifactCitadel.position.x = 460 + Math.sin(frame * 0.006) * 20;
+    // Living floating hover drift anchored at X = +745px (Triad Corridor Clearance)
+    artifactCitadel.position.x = 745 + Math.sin(frame * 0.006) * 20;
     artifactCitadel.position.y = 110 + Math.cos(frame * 0.007) * 16;
     artifactCitadel.rotation.y = -0.35 + Math.sin(frame * 0.005) * 0.08;
     artifactCitadel.rotation.x = 0.08 + Math.cos(frame * 0.008) * 0.05;
@@ -452,17 +483,6 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
 
       // Orbital gimbal radius expands from 0.35 to 1.0
       shardsGimbal.scale.set(shardsDeploy, shardsDeploy, shardsDeploy);
-
-      coreAssembly.traverse((child: any) => {
-        if (child.isMesh && child.material && child.material.emissive) {
-          const isCore =
-            (child.name || "").toLowerCase().includes("core") ||
-            (child.name || "").toLowerCase().includes("shard");
-          child.material.emissiveIntensity = isLightningActive
-            ? isCore ? 7.0 : 1.8
-            : isCore ? 3.5 : 0.6;
-        }
-      });
     }
 
     // -------------------------------------------------------------------------
@@ -472,20 +492,21 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
       yeroWingsLeft.visible = true;
       yeroWingsRight.visible = true;
 
-      // Sweeping wings deploy outward: x = ±1.2 -> ±4.8
-      const wingSpan = 1.2 + yeroDeploy * 3.6;
+      // Asymmetric Triad Fix: Left wing clamped to 2.4, Right wing deployed to 4.8
+      const wingSpanL = 1.2 + yeroDeploy * 1.2;
+      const wingSpanR = 1.2 + yeroDeploy * 3.6;
 
       // Aerodynamic flutter
       const windFlutterL = Math.sin(frame * 0.12) * 0.08;
       const windFlutterR = -Math.sin(frame * 0.12 + 0.5) * 0.08;
 
-      yeroWingsLeft.position.x = -wingSpan;
+      yeroWingsLeft.position.x = -wingSpanL;
       yeroWingsLeft.position.y = 0.4 + yeroDeploy * 0.5;
       yeroWingsLeft.rotation.z = yeroDeploy * 0.35 + windFlutterL;
       yeroWingsLeft.rotation.y = Math.cos(frame * 0.08) * 0.15;
       yeroWingsLeft.scale.set(yeroDeploy, yeroDeploy, yeroDeploy);
 
-      yeroWingsRight.position.x = wingSpan;
+      yeroWingsRight.position.x = wingSpanR;
       yeroWingsRight.position.y = 0.4 + yeroDeploy * 0.5;
       yeroWingsRight.rotation.z = -yeroDeploy * 0.35 + windFlutterR;
       yeroWingsRight.rotation.y = -Math.cos(frame * 0.08) * 0.15;
@@ -501,8 +522,8 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
     if (frame >= 2650 && polaroidDeploy > 0.001) {
       polaroidAperture.visible = true;
 
-      // Articulated mechanical cradle swings forward and to front-left (x = -4.7, z = +3.4)
-      polaroidAperture.position.x = -1.2 - polaroidDeploy * 3.5;
+      // Articulated mechanical cradle: Triad Fix clamps position.x to -1.2 - polaroidDeploy * 1.0 (max -2.2)
+      polaroidAperture.position.x = -1.2 - polaroidDeploy * 1.0;
       polaroidAperture.position.y = 0.1 + polaroidDeploy * 0.7;
       polaroidAperture.position.z = 0.5 + polaroidDeploy * 2.9;
 
@@ -554,23 +575,13 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
 
       const cScale = crystalDeploy * 1.35;
       thunderSpireCrown.scale.set(cScale, cScale, cScale);
-
-      // High voltage lightning surge up to 8.0x emission intensity
-      const vocalPeakSurge = isLightningActive
-        ? 8.0
-        : 3.5 + Math.sin(frame * 0.25) * 1.8;
-
-      thunderSpireCrown.traverse((child: any) => {
-        if (child.isMesh && child.material && child.material.emissive) {
-          child.material.emissiveIntensity = vocalPeakSurge;
-        }
-      });
     } else {
       thunderSpireCrown.visible = false;
     }
 
     // =========================================================================
     // DYNAMIC STORM LIGHTING RIG
+    // Key light surges up to 8.5, Point light surges up to 9.5 during strikes
     // =========================================================================
     if (isLightningActive) {
       hemiLight.intensity = 5.8;
@@ -590,8 +601,51 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
       coreAccentLight.color.setHex(0x00f0ff);
     }
 
+    // =========================================================================
+    // DYNAMIC MATERIAL EMISSIVE SYNCHRONIZATION (8 ZERO-UNLIT PBR MATERIALS)
+    // =========================================================================
+    artifactCitadel.traverse((child: THREE.Object3D) => {
+      if (child instanceof THREE.Mesh && child.material) {
+        const mat = child.material as THREE.MeshStandardMaterial;
+        if (!mat.emissive) return;
+
+        const childName = (child.name || "").toLowerCase();
+
+        if (childName.includes("plasmacore") || childName.includes("shard")) {
+          // Inner Plasma Core & Orbital Shards: baseline 3.5 -> strike surge 7.0
+          mat.emissiveIntensity = isLightningActive ? 7.0 : 3.5;
+          mat.emissive.set(isLightningActive ? accentColor : "#00f5ff");
+        } else if (childName.includes("crystal")) {
+          // Apex Crystal Spike: baseline 3.0 (with vocal pulse) -> strike surge 8.0
+          const vocalPulse = 3.5 + Math.sin(frame * 0.25) * 1.8;
+          mat.emissiveIntensity = isLightningActive ? 8.0 : vocalPulse;
+          mat.emissive.set(isLightningActive ? accentColor : "#00f5ff");
+        } else if (childName.includes("monolith")) {
+          // Basalt Monolith Tower: baseline 0.5 -> strike surge 1.8
+          mat.emissiveIntensity = isLightningActive ? 1.8 : 0.5;
+        } else if (childName.includes("yero")) {
+          // Corrugated Yero Sheets: baseline 0.25 -> strike surge 1.2
+          mat.emissiveIntensity = isLightningActive ? 1.2 : 0.25;
+        } else if (childName.includes("polaroid")) {
+          // Memory Polaroid Frame: baseline 0.4 -> strike surge 1.5
+          mat.emissiveIntensity = isLightningActive ? 1.5 : 0.4;
+        } else if (childName.includes("rebar")) {
+          // Industrial Rust Rebar: baseline 0.6 -> strike surge 2.2
+          mat.emissiveIntensity = isLightningActive ? 2.2 : 0.6;
+        } else if (childName.includes("concrete")) {
+          // Demolition Concrete Block: baseline 0.2 -> strike surge 0.8
+          mat.emissiveIntensity = isLightningActive ? 0.8 : 0.2;
+        }
+      }
+    });
+
     renderer.render(scene, threeCamera);
-  }, [frame, camera, isLightningActive, accentColor]);
+
+    // Frame is fully rendered to WebGL canvas buffer: release Remotion render barrier
+    if (isLoaded) {
+      safeContinueRender();
+    }
+  }, [frame, camera, isLightningActive, accentColor, isLoaded, safeContinueRender]);
 
   return (
     <canvas

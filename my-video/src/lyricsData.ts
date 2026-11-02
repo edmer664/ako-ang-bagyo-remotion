@@ -56,7 +56,7 @@ export const LYRICS: LyricLine[] = [
     startSec: 14,
     endSec: 26.34,
     text: "AKO ANG BAGYO",
-    translation: "A KINETIC MOTION GRAPHIC WORLD",
+    translation: "MOTION BY EDMER",
     section: "intro",
     emphasisWords: ["BAGYO"],
     animStyle: "hazard-monolith",
