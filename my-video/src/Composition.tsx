@@ -11,6 +11,7 @@ import {
 import { Lightning } from "./components/Lightning";
 import { SpatialWorld } from "./components/SpatialWorld";
 import { StormAtmosphere } from "./components/StormAtmosphere";
+import { ThreeBackgroundMonolith } from "./components/ThreeBackgroundMonolith";
 import { ThreeStormAtmosphere } from "./components/ThreeStormAtmosphere";
 import {
   FPS,
@@ -102,6 +103,13 @@ export const AkoAngBagyoComposition: React.FC = () => {
       {/* Camera-Coupled Dynamic Storm Atmosphere */}
       <StormAtmosphere
         section={activeLine?.section || "intro"}
+        camera={camera}
+        accentColor={accentColor}
+        isLightningActive={isLightningActive}
+      />
+
+      {/* 3D Blender Storm Monolith & Debris in Deep Atmospheric Background */}
+      <ThreeBackgroundMonolith
         camera={camera}
         accentColor={accentColor}
         isLightningActive={isLightningActive}
