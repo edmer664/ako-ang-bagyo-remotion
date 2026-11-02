@@ -96,7 +96,7 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
     artifactCitadel.rotation.y = -0.35; // angled toward camera to show deep 3D facets
     scene.add(artifactCitadel);
 
-    // Sub-assemblies
+    // Sub-assemblies corresponding to the 5 Storyboard Stages
     const coreAssembly = new THREE.Group();
     const shardsGimbal = new THREE.Group();
     const yeroWingsLeft = new THREE.Group();
@@ -113,6 +113,13 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
     artifactCitadel.add(demolitionFoundation);
     artifactCitadel.add(thunderSpireCrown);
 
+    // Start subsequent stages strictly hidden until their sequential frame arrival
+    yeroWingsLeft.visible = false;
+    yeroWingsRight.visible = false;
+    polaroidAperture.visible = false;
+    demolitionFoundation.visible = false;
+    thunderSpireCrown.visible = false;
+
     try {
       const binaryString = atob(STORM_MONOLITH_BASE64);
       const bytes = new Uint8Array(binaryString.length);
@@ -126,6 +133,7 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
         (gltf) => {
           const rawObjects = [...gltf.scene.children];
 
+          let shardIdx = 0;
           let yeroIdx = 0;
 
           rawObjects.forEach((obj: any) => {
@@ -200,21 +208,52 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
               }
             });
 
-            // Mount into dedicated sub-assembly of the Unfolding Artifact Citadel
-            if (name.includes("StormMonolith") || name.includes("InnerPlasmaCore")) {
+            // Mount into dedicated sub-assembly with clean, organized local coordinates (NO JUMBLED CLIPPING)
+            if (name.includes("StormMonolith")) {
+              obj.position.set(0, 0, 0);
+              obj.rotation.set(0, 0, 0);
+              coreAssembly.add(obj);
+            } else if (name.includes("InnerPlasmaCore")) {
+              obj.position.set(0, 0, 0);
+              obj.rotation.set(0, 0, 0);
               coreAssembly.add(obj);
             } else if (name.includes("OrbitalShard")) {
+              // Procedurally distribute 12 shards in a clean orbital gimbal ring
+              const i = shardIdx++;
+              const theta = (i / 12) * Math.PI * 2;
+              const radius = 2.4;
+              const yPos = Math.sin(i * 1.5) * 1.4;
+              obj.position.set(Math.cos(theta) * radius, yPos, Math.sin(theta) * radius);
+              obj.rotation.set(0.3 * i, 0.5 * i, 0);
               shardsGimbal.add(obj);
             } else if (name.includes("TumblingYero")) {
-              // Split 6 yero sheets between left wing and right wing
-              if (yeroIdx % 2 === 0) {
+              // 6 Corrugated galvanized metal sheets arranged into 2 sweeping aerodynamic wings
+              const sheetIdxInWing = Math.floor(yeroIdx / 2); // 0, 1, 2
+              const isLeft = yeroIdx % 2 === 0;
+
+              if (isLeft) {
+                // Stepped tier along left wing flank
+                const stepX = -sheetIdxInWing * 1.1;
+                const stepY = sheetIdxInWing * 0.4;
+                const stepZ = -sheetIdxInWing * 0.15;
+                const tiltZ = 0.15 + sheetIdxInWing * 0.16;
+                obj.position.set(stepX, stepY, stepZ);
+                obj.rotation.set(0.1, 0, tiltZ);
                 yeroWingsLeft.add(obj);
               } else {
+                // Stepped tier along right wing flank (mirrored)
+                const stepX = sheetIdxInWing * 1.1;
+                const stepY = sheetIdxInWing * 0.4;
+                const stepZ = -sheetIdxInWing * 0.15;
+                const tiltZ = -0.15 - sheetIdxInWing * 0.16;
+                obj.position.set(stepX, stepY, stepZ);
+                obj.rotation.set(0.1, 0, tiltZ);
                 yeroWingsRight.add(obj);
               }
               yeroIdx++;
             } else if (name.includes("MemoryPolaroid")) {
-              obj.rotation.x = Math.PI / 2;
+              obj.position.set(0, 0, 0);
+              obj.rotation.set(Math.PI / 2, 0, 0);
               polaroidAperture.add(obj);
 
               // Vivid storm photo insert on the front face of the polaroid
@@ -226,22 +265,53 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
               const photoMesh = new THREE.Mesh(photoGeom, photoMat);
               photoMesh.position.set(0, 0.08, 0.025);
               polaroidAperture.add(photoMesh);
-            } else if (name.includes("ConcreteBlock") || name.includes("RebarRod")) {
+
+              // Articulated mechanical cradle arm connecting to monolith flank
+              const strutGeom = new THREE.CylinderGeometry(0.04, 0.04, 3.2, 8);
+              const strutMat = new THREE.MeshStandardMaterial({
+                color: new THREE.Color(0x334155),
+                metalness: 0.8,
+                roughness: 0.3,
+              });
+              const strut = new THREE.Mesh(strutGeom, strutMat);
+              strut.position.set(1.4, -0.4, -1.2);
+              strut.rotation.set(0.4, -0.6, 1.1);
+              polaroidAperture.add(strut);
+            } else if (name.includes("ConcreteBlock")) {
+              obj.position.set(0, 0, 0);
+              obj.rotation.set(0, 0, 0);
+              obj.scale.set(1.6, 1.1, 1.6);
+              demolitionFoundation.add(obj);
+
+              // Pneumatic piston rods extending from monolith base into concrete foundation
+              const pistonGeom = new THREE.CylinderGeometry(0.08, 0.08, 2.6, 12);
+              const pistonMat = new THREE.MeshStandardMaterial({
+                color: new THREE.Color(0x94a3b8),
+                metalness: 0.85,
+                roughness: 0.2,
+              });
+              const pistonL = new THREE.Mesh(pistonGeom, pistonMat);
+              pistonL.position.set(-0.6, 1.4, 0);
+              demolitionFoundation.add(pistonL);
+
+              const pistonR = new THREE.Mesh(pistonGeom, pistonMat);
+              pistonR.position.set(0.6, 1.4, 0);
+              demolitionFoundation.add(pistonR);
+            } else if (name.includes("RebarRod")) {
+              const isFirst = name.includes("_0");
+              obj.position.set(isFirst ? -0.55 : 0.55, 0.6, isFirst ? 0.2 : -0.2);
+              obj.rotation.set(isFirst ? 0.1 : -0.1, 0, isFirst ? 0.12 : -0.12);
+              obj.scale.set(1.4, 1.8, 1.4);
               demolitionFoundation.add(obj);
             } else if (name.includes("CrystalSpike")) {
+              obj.position.set(0, 0, 0);
+              obj.rotation.set(0, 0, 0);
+              obj.scale.set(1.4, 1.8, 1.4);
               thunderSpireCrown.add(obj);
             } else {
               coreAssembly.add(obj);
             }
           });
-
-          // Initial positions of retracted sub-assemblies inside the Citadel
-          coreAssembly.scale.set(1.0, 1.0, 1.0);
-          yeroWingsLeft.scale.set(0.01, 0.01, 0.01);
-          yeroWingsRight.scale.set(0.01, 0.01, 0.01);
-          polaroidAperture.scale.set(0.01, 0.01, 0.01);
-          demolitionFoundation.scale.set(0.01, 0.01, 0.01);
-          thunderSpireCrown.scale.set(0.01, 0.01, 0.01);
         },
         (error) => {
           console.warn("Failed to parse storyboard GLB:", error);
@@ -287,7 +357,7 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
     };
   }, [width, height]);
 
-  // Per-frame unfolding animation & living simulation
+  // Per-frame unfolding animation & living simulation strictly matching storyboard sequence
   useLayoutEffect(() => {
     const ctx = contextRef.current;
     if (!ctx) return;
@@ -319,10 +389,11 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
     threeCamera.rotation.z = (-camera.rz * Math.PI) / 180 * 0.7;
 
     // =========================================================================
-    // STORYBOARD UNFOLDING LIFECYCLE (UNFOLDS PROGRESSIVELY AS SONG ADVANCES)
+    // SEQUENTIAL LIFECYCLE PROGRESSION (UNFOLDS PROGRESSIVELY IN EXACT STAGES)
     // =========================================================================
 
-    // Stage 1: Shards expansion & awakening (Intro -> Verse 1: frames 0 -> 900)
+    // Stage 1: Shards expansion & awakening (Intro & Verse 1: frames 0 -> 900)
+    // Orbital gimbal radius expands smoothly from 0.35 to 1.0
     const shardsDeploy = interpolate(frame, [0, 900], [0.35, 1.0], {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
@@ -357,27 +428,30 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
     });
 
     // =========================================================================
-    // DYNAMIC CITADEL MOTION & MECHANICAL UNROLLING
+    // DYNAMIC CITADEL MOTION & ARTICULATION
     // =========================================================================
 
-    // Overall Citadel scale grows as more components unlock
+    // Overall Citadel scale grows subtly as more components unlock
     const citadelScale = 38 * (1.0 + crystalDeploy * 0.15);
     artifactCitadel.scale.set(citadelScale, citadelScale, citadelScale);
 
-    // Living floating hover drift in upper-right sky (frames the typography corridor)
+    // Living floating hover drift in celestial upper-right sky
     artifactCitadel.position.x = 460 + Math.sin(frame * 0.006) * 20;
     artifactCitadel.position.y = 110 + Math.cos(frame * 0.007) * 16;
     artifactCitadel.rotation.y = -0.35 + Math.sin(frame * 0.005) * 0.08;
     artifactCitadel.rotation.x = 0.08 + Math.cos(frame * 0.008) * 0.05;
 
-    // 1. Core & Orbital Shards
+    // -------------------------------------------------------------------------
+    // 1. STAGE 1: DORMANT CORE & ORBITAL SHARDS (Active throughout entire song)
+    // -------------------------------------------------------------------------
     if (coreAssembly.children.length > 0) {
       coreAssembly.rotation.y = frame * 0.008;
 
       shardsGimbal.rotation.y = frame * 0.025;
       shardsGimbal.rotation.x = 0.45 + Math.sin(frame * 0.01) * 0.12;
-      const shardScale = 1.0 + shardsDeploy * 0.4;
-      shardsGimbal.scale.set(shardScale, shardScale, shardScale);
+
+      // Orbital gimbal radius expands from 0.35 to 1.0
+      shardsGimbal.scale.set(shardsDeploy, shardsDeploy, shardsDeploy);
 
       coreAssembly.traverse((child: any) => {
         if (child.isMesh && child.material && child.material.emissive) {
@@ -385,93 +459,114 @@ export const ThreeBackgroundMonolith: React.FC<BackgroundMonolithProps> = ({
             (child.name || "").toLowerCase().includes("core") ||
             (child.name || "").toLowerCase().includes("shard");
           child.material.emissiveIntensity = isLightningActive
-            ? (isCore ? 7.0 : 1.8)
-            : (isCore ? 3.5 : 0.6);
+            ? isCore ? 7.0 : 1.8
+            : isCore ? 3.5 : 0.6;
         }
       });
     }
 
-    // 2. Yero Wings Unfolding (Chorus 1: Aerodynamic Wind Vanes)
-    if (yeroWingsLeft.children.length > 0) {
-      if (yeroDeploy > 0.001) {
-        yeroWingsLeft.visible = true;
-        yeroWingsRight.visible = true;
+    // -------------------------------------------------------------------------
+    // 2. STAGE 2: AERODYNAMIC YERO WINGS (Appears strictly on Chorus 1, Frame >= 1650)
+    // -------------------------------------------------------------------------
+    if (frame >= 1650 && yeroDeploy > 0.001) {
+      yeroWingsLeft.visible = true;
+      yeroWingsRight.visible = true;
 
-        // Deploy outward from the flanks
-        const wingSpan = 1.2 + yeroDeploy * 3.6;
-        yeroWingsLeft.position.x = -wingSpan;
-        yeroWingsLeft.position.y = yeroDeploy * 0.6;
-        yeroWingsLeft.rotation.z = yeroDeploy * 0.4 + Math.sin(frame * 0.03) * 0.1;
-        yeroWingsLeft.rotation.y = Math.sin(frame * 0.04) * 0.25;
-        yeroWingsLeft.scale.set(yeroDeploy * 1.8, yeroDeploy * 1.8, yeroDeploy * 1.8);
+      // Sweeping wings deploy outward: x = ±1.2 -> ±4.8
+      const wingSpan = 1.2 + yeroDeploy * 3.6;
 
-        yeroWingsRight.position.x = wingSpan;
-        yeroWingsRight.position.y = yeroDeploy * 0.6;
-        yeroWingsRight.rotation.z = -yeroDeploy * 0.4 - Math.sin(frame * 0.03) * 0.1;
-        yeroWingsRight.rotation.y = -Math.sin(frame * 0.04) * 0.25;
-        yeroWingsRight.scale.set(yeroDeploy * 1.8, yeroDeploy * 1.8, yeroDeploy * 1.8);
-      } else {
-        yeroWingsLeft.visible = false;
-        yeroWingsRight.visible = false;
-      }
+      // Aerodynamic flutter
+      const windFlutterL = Math.sin(frame * 0.12) * 0.08;
+      const windFlutterR = -Math.sin(frame * 0.12 + 0.5) * 0.08;
+
+      yeroWingsLeft.position.x = -wingSpan;
+      yeroWingsLeft.position.y = 0.4 + yeroDeploy * 0.5;
+      yeroWingsLeft.rotation.z = yeroDeploy * 0.35 + windFlutterL;
+      yeroWingsLeft.rotation.y = Math.cos(frame * 0.08) * 0.15;
+      yeroWingsLeft.scale.set(yeroDeploy, yeroDeploy, yeroDeploy);
+
+      yeroWingsRight.position.x = wingSpan;
+      yeroWingsRight.position.y = 0.4 + yeroDeploy * 0.5;
+      yeroWingsRight.rotation.z = -yeroDeploy * 0.35 + windFlutterR;
+      yeroWingsRight.rotation.y = -Math.cos(frame * 0.08) * 0.15;
+      yeroWingsRight.scale.set(yeroDeploy, yeroDeploy, yeroDeploy);
+    } else {
+      yeroWingsLeft.visible = false;
+      yeroWingsRight.visible = false;
     }
 
-    // 3. Memory Polaroid Aperture Unfolding (Verse 2: Floating Memory Relic)
-    if (polaroidAperture.children.length > 0) {
-      if (polaroidDeploy > 0.001) {
-        polaroidAperture.visible = true;
+    // -------------------------------------------------------------------------
+    // 3. STAGE 3: MEMORY POLAROID APERTURE (Appears strictly on Verse 2, Frame >= 2650)
+    // -------------------------------------------------------------------------
+    if (frame >= 2650 && polaroidDeploy > 0.001) {
+      polaroidAperture.visible = true;
 
-        // Swings forward on an articulated arm
-        polaroidAperture.position.x = -2.2 - polaroidDeploy * 2.5;
-        polaroidAperture.position.y = -0.3 + polaroidDeploy * 1.1;
-        polaroidAperture.position.z = 1.2 + polaroidDeploy * 2.2;
-        polaroidAperture.rotation.y = 0.4 + Math.sin(frame * 0.015) * 0.1;
-        polaroidAperture.rotation.z = -0.22 + Math.sin(frame * 0.012) * 0.06;
-        const pScale = polaroidDeploy * 1.6;
-        polaroidAperture.scale.set(pScale, pScale, pScale);
-      } else {
-        polaroidAperture.visible = false;
-      }
+      // Articulated mechanical cradle swings forward and to front-left (x = -4.7, z = +3.4)
+      polaroidAperture.position.x = -1.2 - polaroidDeploy * 3.5;
+      polaroidAperture.position.y = 0.1 + polaroidDeploy * 0.7;
+      polaroidAperture.position.z = 0.5 + polaroidDeploy * 2.9;
+
+      // Angled cleanly to face camera with distinct photographic framing
+      polaroidAperture.rotation.y = 0.48 + Math.sin(frame * 0.02) * 0.05;
+      polaroidAperture.rotation.x = -0.1 + Math.cos(frame * 0.015) * 0.04;
+      polaroidAperture.rotation.z = -0.15;
+
+      const pScale = polaroidDeploy * 1.5;
+      polaroidAperture.scale.set(pScale, pScale, pScale);
+    } else {
+      polaroidAperture.visible = false;
     }
 
-    // 4. Heavy Demolition Foundation & Rebars (Chorus 2: Seismic Anchors)
-    if (demolitionFoundation.children.length > 0) {
-      if (demolitionDeploy > 0.001) {
-        demolitionFoundation.visible = true;
+    // -------------------------------------------------------------------------
+    // 4. STAGE 4: HEAVY DEMOLITION FOUNDATION & REBARS (Appears on Chorus 2, Frame >= 3650)
+    // -------------------------------------------------------------------------
+    if (frame >= 3650 && demolitionDeploy > 0.001) {
+      demolitionFoundation.visible = true;
 
-        // Structural bass drop tremors
-        const tremor =
-          (Math.sin(frame * 0.8) * 0.1 + Math.cos(frame * 1.4) * 0.08) *
-          (isLightningActive ? 3.0 : 1.0);
+      // Structural bass drop shockwaves and rumble
+      const tremor =
+        (Math.sin(frame * 0.9) * 0.08 + Math.cos(frame * 1.5) * 0.06) *
+        (isLightningActive ? 2.5 : 1.0);
 
-        demolitionFoundation.position.y = -2.8 - demolitionDeploy * 2.2 + tremor;
-        demolitionFoundation.rotation.y = frame * 0.005;
-        const dScale = demolitionDeploy * 1.3;
-        demolitionFoundation.scale.set(dScale, dScale, dScale);
-      } else {
-        demolitionFoundation.visible = false;
-      }
+      // Heavy pneumatic pistons extend downward beneath chassis (y = -2.8 -> -5.0)
+      demolitionFoundation.position.y = -2.8 - demolitionDeploy * 2.2 + tremor;
+      demolitionFoundation.position.x = 0;
+      demolitionFoundation.position.z = 0;
+      demolitionFoundation.rotation.y = frame * 0.006;
+
+      const dScale = demolitionDeploy * 1.25;
+      demolitionFoundation.scale.set(dScale, dScale, dScale);
+    } else {
+      demolitionFoundation.visible = false;
     }
 
-    // 5. Apex Thunder Crystal Spire (Bridge Climax: Lightning Conductor)
-    if (thunderSpireCrown.children.length > 0) {
-      if (crystalDeploy > 0.001) {
-        thunderSpireCrown.visible = true;
+    // -------------------------------------------------------------------------
+    // 5. STAGE 5: APEX THUNDER CRYSTAL SPIRE (Appears on Bridge Climax, Frame >= 5450)
+    // -------------------------------------------------------------------------
+    if (frame >= 5450 && crystalDeploy > 0.001) {
+      thunderSpireCrown.visible = true;
 
-        // Telescopes upward into the sky
-        thunderSpireCrown.position.y = 3.2 + crystalDeploy * 3.4;
-        thunderSpireCrown.rotation.y = -frame * 0.025;
-        const cScale = crystalDeploy * 1.2;
-        thunderSpireCrown.scale.set(cScale, cScale, cScale);
+      // Spire telescopes high into the storm sky (y = +3.2 -> +6.6)
+      thunderSpireCrown.position.y = 3.2 + crystalDeploy * 3.4;
+      thunderSpireCrown.position.x = 0;
+      thunderSpireCrown.position.z = 0;
+      thunderSpireCrown.rotation.y = -frame * 0.03;
 
-        thunderSpireCrown.traverse((child: any) => {
-          if (child.isMesh && child.material && child.material.emissive) {
-            child.material.emissiveIntensity = isLightningActive ? 8.0 : 3.5;
-          }
-        });
-      } else {
-        thunderSpireCrown.visible = false;
-      }
+      const cScale = crystalDeploy * 1.35;
+      thunderSpireCrown.scale.set(cScale, cScale, cScale);
+
+      // High voltage lightning surge up to 8.0x emission intensity
+      const vocalPeakSurge = isLightningActive
+        ? 8.0
+        : 3.5 + Math.sin(frame * 0.25) * 1.8;
+
+      thunderSpireCrown.traverse((child: any) => {
+        if (child.isMesh && child.material && child.material.emissive) {
+          child.material.emissiveIntensity = vocalPeakSurge;
+        }
+      });
+    } else {
+      thunderSpireCrown.visible = false;
     }
 
     // =========================================================================
