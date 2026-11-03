@@ -242,18 +242,52 @@ To guarantee mathematical zero-penetration into Tier 1 (`minRelX > +500px`) unde
 
 ## 7. Reference Assets in Workspace
 
-The visual direction is anchored by two production-ready concept assets deployed directly in the project workspace:
+The visual direction is anchored by seven production-ready concept assets and 3D GLTF models deployed directly in the project workspace:
 
 1. **Hero Storm World Reference**:
    - Runtime Path: `my-video/public/assets/ako_ang_bagyo_storm_concept.jpg`
    - Documentation Copy: `docs/concept/ako_ang_bagyo_storm_concept.jpg`
-   - File Size: `867.95 KB` (888,779 bytes)
-   - Dimensions: `1376 x 768` (16:9 widescreen, 1.792 aspect ratio)
+   - File Size: `867.95 KB` (888,779 bytes) | Dimensions: `1376 x 768` (16:9 widescreen)
    - Visual Features: Flanking megaliths, central supercell eye, electric cyan plasma channels, deep indigo volumetric fog.
 
 2. **Architectural & Material Detail Reference**:
    - Runtime Path: `my-video/public/assets/monolith_asset_detail.jpg`
    - Documentation Copy: `docs/concept/monolith_asset_detail.jpg`
-   - File Size: `992.55 KB` (1,016,376 bytes)
-   - Dimensions: `1376 x 768` (16:9 widescreen, 1.792 aspect ratio)
+   - File Size: `992.55 KB` (1,016,376 bytes) | Dimensions: `1376 x 768` (16:9 widescreen)
    - Visual Features: Tapered spire obelisk, exposed rebar framing, corrugated yero sheets, translucent crystal apex needle crown.
+
+3. **Scene 3: Pre-Chorus Hazard Zone**:
+   - Runtime Path: `my-video/public/assets/scene_prechorus_hazard.jpg`
+   - Documentation Copy: `docs/concept/scene_prechorus_hazard.jpg`
+   - File Size: `656.8 KB` (672,577 bytes) | Dimensions: `1376 x 768`
+   - Visual Features: Flanking brutalist basalt hazard monolith pylons, hazard crimson (#ff3b30) chevron striping, warning strobe lighting.
+
+4. **Scene 4: Chorus 1 Tempest Rooftops & Flying Yero**:
+   - Runtime Path: `my-video/public/assets/scene_chorus1_yero.jpg`
+   - Documentation Copy: `docs/concept/scene_chorus1_yero.jpg`
+   - File Size: `935.9 KB` (958,365 bytes) | Dimensions: `1376 x 768`
+   - Visual Features: Corrugated galvanized iron sheets (*yero*) tumbling violently through storm updrafts, silhouetted rooftops, specular cyan reflections.
+
+5. **Scene 5: Verse 2 Memory Chamber & Ropes**:
+   - Runtime Path: `my-video/public/assets/scene_verse2_memory.jpg`
+   - Documentation Copy: `docs/concept/scene_verse2_memory.jpg`
+   - File Size: `935.8 KB` (958,208 bytes) | Dimensions: `1376 x 768`
+   - Visual Features: Drifting Polaroid photo frames, swaying heavy mooring cables/ropes, melancholy twilight violet/cyan mist.
+
+6. **Scene 6: Chorus 2 Structural Demolition & Wall Ruin**:
+   - Runtime Path: `my-video/public/assets/scene_chorus2_demolition.jpg`
+   - Documentation Copy: `docs/concept/scene_chorus2_demolition.jpg`
+   - File Size: `991.3 KB` (1,015,082 bytes) | Dimensions: `1376 x 768`
+   - Visual Features: Fractured concrete foundation slabs crumbling on pneumatic pistons, glowing rust-orange industrial rebar rods (#f97316).
+
+7. **Scene 7: Bridge Celestial Climax & Crystal Spire**:
+   - Runtime Path: `my-video/public/assets/scene_bridge_celestial.jpg`
+   - Documentation Copy: `docs/concept/scene_bridge_celestial.jpg`
+   - File Size: `847.5 KB` (867,851 bytes) | Dimensions: `1376 x 768`
+   - Visual Features: Slender crystalline apex needle spire discharging violet (#8b5cf6) and cyan lightning conduits, dissolving into ethereal plasma embers.
+
+8. **3D Storyboard Asset Bundle (Blender GLB)**:
+   - Runtime Path: `my-video/public/assets/storm_storyboard_assets.glb`
+   - TypeScript In-Memory Embed: `my-video/src/assets/stormStoryboardAssetsBase64.ts`
+   - Extracted 3D Meshes: `StormMonolith`, `InnerPlasmaCore`, `CrystalSpike`, `HazardPylon`, `MooringRope`, `MemoryPolaroid`, `ConcreteBlock`, `RebarRod_0..1`, `OrbitalShard_0..11`, `TumblingYero_0..5`.
+

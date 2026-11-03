@@ -11,6 +11,7 @@ import {
 import { Lightning } from "./components/Lightning";
 import { SpatialWorld } from "./components/SpatialWorld";
 import { StormAtmosphere } from "./components/StormAtmosphere";
+import { ThreeStoryboardBackground } from "./components/ThreeStoryboardBackground";
 import { ThreeStormAtmosphere } from "./components/ThreeStormAtmosphere";
 import {
   FPS,
@@ -107,6 +108,13 @@ export const AkoAngBagyoComposition: React.FC = () => {
         isLightningActive={isLightningActive}
       />
 
+      {/* 3D Storyboard Conceptual Background & Environmental Geometry */}
+      <ThreeStoryboardBackground
+        camera={camera}
+        activeSection={activeLine?.section || "intro"}
+        accentColor={accentColor}
+        isLightningActive={isLightningActive}
+      />
 
       {/* 3D Continuous World Navigation & Storyboard Parallax Elements */}
       <SpatialWorld

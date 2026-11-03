@@ -112,51 +112,64 @@ Close-up three-quarter perspective showcasing the intricate geometry and materia
 
 ---
 
-## 3. Auxiliary & Sequence-Specific Prompts
+## 3. Storyboard Scene Concept Art Prompts (Generated Assets)
 
-The following prompts expand the visual catalog for sequence-specific animation phases, post-processing backdrops, and promotional key art:
+The following concept references were generated via Gemini image models to conceptualize the distinct scenes across the narrative storyboard of 'Ako Ang Bagyo':
 
-### Prompt 3: Volumetric Eye of the Storm (Remotion 2.5D Skybox Backdrop)
+### Scene 3: Pre-Chorus Hazard Zone
+- **Identifier**: `scene_prechorus_hazard`
+- **Output Filename (Runtime)**: `my-video/public/assets/scene_prechorus_hazard.jpg`
+- **Output Filename (Documentation)**: `docs/concept/scene_prechorus_hazard.jpg`
+- **Verified Dimensions**: `1376 x 768` pixels (16:9 widescreen)
+- **Verified File Size**: `672,577 bytes` (~656.8 KB)
+- **Prompt**:
+  ```text
+  Cinematic 16:9 concept art of a sci-fi storm hazard zone. Towering brutalist dark basalt barrier monolith pylons flanking the left and right sides with pulsing emergency hazard crimson (#ff3b30) and amber warning lights, diagonal warning chevron patterns, high-voltage electrical sparks crackling in mid-air. Deep stormy indigo supercell storm clouds with red alarm atmospheric lighting in the background, open central corridor, volumetric fog, dramatic sci-fi cinematic atmosphere, zero unlit surfaces, 8k octane render.
+  ```
 
-```text
-Cinematic 16:9 panoramic background plate of the Eye of a Celestial Supercell Typhoon. 
+### Scene 4: Chorus 1 Tempest Rooftops & Flying Yero
+- **Identifier**: `scene_chorus1_yero`
+- **Output Filename (Runtime)**: `my-video/public/assets/scene_chorus1_yero.jpg`
+- **Output Filename (Documentation)**: `docs/concept/scene_chorus1_yero.jpg`
+- **Verified Dimensions**: `1376 x 768` pixels (16:9 widescreen)
+- **Verified File Size**: `958,365 bytes` (~935.9 KB)
+- **Prompt**:
+  ```text
+  Cinematic 16:9 action concept art of a fierce Philippine typhoon tempest ripping through rooftops. Twisted corrugated galvanized silver-zinc iron roof sheets ('yero') violently tumbling through mid-air updrafts catching bright electric cyan (#00f0ff) lightning reflections. Silhouetted industrial rooftop structures below against a churning supercell sky. Open central corridor, intense wind streaks, water spray, dynamic motion freeze-frame, rich stormy blues and cyans, zero pitch black, photorealistic VFX cinematic render.
+  ```
 
-Atmospheric environment only, without architectural foreground elements:
-- A majestic circular vortex of towering cumulonimbus storm clouds forming a colossal natural arena.
-- In the center of the vortex, heavenly celestial god rays descend from deep twilight violet and electric indigo cloud shelves into an ethereal ocean of mist.
-- Subtle distant branching lightning conduits pulse in the far horizon with vibrant cyan and lavender glows.
-- Smooth, clean gradient transitions with generous negative space across the center 1200x600 pixels.
-- Zero harsh high-frequency noise in the center to maintain maximum text readability.
-- Rich, luminous atmospheric scattering, no pitch black, deep oceanic navy (#060c18) into vibrant electric sky blue (#38bdf8).
-- 8k, Unreal Engine 5 volumetric fog, cinematic widescreen wallpaper.
-```
+### Scene 5: Verse 2 Memory Chamber & Ropes
+- **Identifier**: `scene_verse2_memory`
+- **Output Filename (Runtime)**: `my-video/public/assets/scene_verse2_memory.jpg`
+- **Output Filename (Documentation)**: `docs/concept/scene_verse2_memory.jpg`
+- **Verified Dimensions**: `1376 x 768` pixels (16:9 widescreen)
+- **Verified File Size**: `958,208 bytes` (~935.8 KB)
+- **Prompt**:
+  ```text
+  Cinematic 16:9 moody sci-fi concept art of an intimate memory chamber caught in a celestial storm. Nostalgic floating Polaroid photo frames glowing with incandescent cyan and soft warm light drifting in the air, intertwined with heavy nautical mooring ropes swaying in turbulent storm drafts. Deep indigo and twilight violet volumetric mist with gentle electric cyan particle dust. Open central corridor, poignant and haunting atmosphere, rich specular highlights, 8k octane render.
+  ```
 
-### Prompt 4: Demolition Foundation & Corrugated Yero Debris (Chorus 2 Detail)
+### Scene 6: Chorus 2 Structural Demolition & Wall Ruin
+- **Identifier**: `scene_chorus2_demolition`
+- **Output Filename (Runtime)**: `my-video/public/assets/scene_chorus2_demolition.jpg`
+- **Output Filename (Documentation)**: `docs/concept/scene_chorus2_demolition.jpg`
+- **Verified Dimensions**: `1376 x 768` pixels (16:9 widescreen)
+- **Verified File Size**: `1,015,082 bytes` (~991.3 KB)
+- **Prompt**:
+  ```text
+  Cinematic 16:9 concept art of tectonic wall demolition in a violent thunderstorm. Massive shattered reinforced concrete foundation blocks collapsing and fracturing on pneumatic pistons, with twisted industrial rebar rods glowing with intense internal heat and rust-orange luminescence (#f97316). Flying concrete rubble and sparks caught in torrential supercell updrafts, electric cyan lightning branching across deep stormy skies, open central corridor, dramatic action, zero pitch-black areas, 8k render.
+  ```
 
-```text
-Detailed 16:9 macro action shot of storm-wrecked architectural debris caught in violent updrafts, inspired by the lyric 'Gigibain ko mga pader, tatangayin ko bawat yero'. 
-
-Key elements:
-- Twisted corrugated galvanized iron roof panels ('yero') violently tumbling in mid-air, catching brilliant specular cyan lightning highlights on silver-zinc surfaces.
-- Shattered reinforced concrete wall chunks with twisted industrial rebar rods glowing with internal heat and rust-orange luminescence (#f97316).
-- Electric sparks and plasma arcs leaping between metallic debris fragments.
-- Motion blur on peripheral debris, crisp sharp focus on the central flying elements.
-- Dark stormy indigo background illuminated by high-voltage lightning discharge, zero pitch-black dead zones.
-- Photorealistic VFX debris pass, octane render, dynamic action freeze-frame.
-```
-
-### Prompt 5: Celestial Dissolution & Apex Thunder Spire (Bridge Climax: "Kahit Matunaw Pa Ako")
-
-```text
-Ethereal 16:9 cinematic climax of a celestial crystal spire dissolving into pure energy and lightning, inspired by 'Kahit matunaw pa ako, ako ang bagyo'. 
-
-Visual composition:
-- An ultra-slender crystalline needle spire at the summit of a monolithic citadel discharging thousands of branching violet and electric cyan lightning conduits into the supercell vortex.
-- The physical stone structure begins to dissolve into translucent glowing plasma particles and levitating luminous dust.
-- Color palette dominated by twilight violet (#8b5cf6), ethereal lavender (#c084fc), brilliant cyan (#00f0ff), and blinding pure white discharge cores (#ffffff).
-- Celestial god rays and volumetric lens flares emanating from the apex crown.
-- Sublime, transcendent emotional catharsis, 8k resolution, octane render, cinematic masterpiece.
-```
+### Scene 7: Bridge Celestial Climax & Crystal Spire Dissolution
+- **Identifier**: `scene_bridge_celestial`
+- **Output Filename (Runtime)**: `my-video/public/assets/scene_bridge_celestial.jpg`
+- **Output Filename (Documentation)**: `docs/concept/scene_bridge_celestial.jpg`
+- **Verified Dimensions**: `1376 x 768` pixels (16:9 widescreen)
+- **Verified File Size**: `867,851 bytes` (~847.5 KB)
+- **Prompt**:
+  ```text
+  Cinematic 16:9 climax concept art of a celestial crystalline apex needle spire dissolving into pure lightning and ethereal energy. Slender glowing quartz needle spire discharging branching twilight violet (#8b5cf6), lavender (#c084fc), and pure electric cyan lightning into the eye of a colossal supercell vortex. The architecture dissolves into thousands of levitating glowing plasma embers and transcendent god rays. Open central corridor, sublime emotional catharsis, 8k masterpiece render.
+  ```
 
 ---
 
